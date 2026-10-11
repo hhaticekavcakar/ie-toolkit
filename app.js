@@ -2,9 +2,10 @@
    IE Toolkit — app.js
    1. Conversion data      (edit here to add units or categories)
    2. Translations         (one dictionary for every user-facing string)
-   3. Pure functions       (convert, parseInput, formatNumber, evaluate)
+   3. Pure functions       (unit conversion, number parsing/formatting, OEE)
    4. ConvertLab UI        (full converter + hero preview)
-   5. Site UI              (language, theme, mobile nav, scroll reveal, footer year)
+   5. OEE calculator UI
+   6. Site UI              (language, theme, mobile nav, scroll reveal, footer year)
    ========================================================================== */
 (function () {
   'use strict';
@@ -144,7 +145,7 @@
 
       'modules.label': 'Sec. 01 — Tool directory',
       'modules.title': 'Modules',
-      'modules.intro': 'One tool is available today. Three more are in development on the same foundation.',
+      'modules.intro': 'Two tools are available today. Two more are in development on the same foundation.',
       'tool.word': 'Tool',
       'tool.open': 'Open tool',
       'tool1.desc': 'Unit converter for length, mass, pressure, energy and temperature.',
@@ -169,7 +170,48 @@
       'error.absoluteZero': 'Below absolute zero (0 K) — enter a higher temperature',
       'note.negative': 'Negative values are unusual for {category}',
 
-      'pricing.label': 'Sec. 03 — Plans',
+      'oee.label': 'Sec. 03 — Tool 02',
+      'oee.intro': 'Enter the figures for one production run to see availability, performance, quality and OEE.',
+      'oee.inputs': 'Production inputs',
+      'oee.planned': 'Planned production time',
+      'oee.downtime': 'Downtime',
+      'oee.cycle': 'Ideal cycle time',
+      'oee.units': 'Total units produced',
+      'oee.defects': 'Defective units',
+      'oee.unit.min': 'min',
+      'oee.unit.minPerUnit': 'min/unit',
+      'oee.unit.units': 'units',
+      'oee.overall': 'Overall equipment effectiveness',
+      'oee.formulaLabel': 'Availability × Performance × Quality',
+      'oee.availability': 'Availability',
+      'oee.performance': 'Performance',
+      'oee.quality': 'Quality',
+      'oee.lowestTag': 'Lowest',
+      'oee.detail.availability': '{a} of {b} min operating',
+      'oee.detail.performance': '{a} of {b} possible units',
+      'oee.detail.quality': '{a} good of {b} units',
+      'oee.operating': 'Operating time',
+      'oee.good': 'Good units',
+      'oee.analysis': 'Performance analysis',
+      'oee.analysis.lowest': 'Lowest component: {component} ({value})',
+      'oee.suggest.availability': 'Review downtime causes, equipment failures and maintenance scheduling.',
+      'oee.suggest.performance': 'Review cycle times, minor stops and production speed losses.',
+      'oee.suggest.quality': 'Review defective products, process variation and quality control.',
+      'oee.disclaimer': 'These suggestions are general guidance, not a definitive diagnosis.',
+      'oee.warning.over100': 'Performance is above 100%. More units were produced than the ideal cycle time allows in the operating time, so the inputs may be inconsistent. Check the ideal cycle time, unit count and downtime. The value is shown as calculated, not capped.',
+      'oee.invalid.title': 'Results unavailable',
+      'oee.invalid.text': 'Correct the highlighted inputs to see the results.',
+      'oee.error.required': 'Enter a value',
+      'oee.error.negative': 'Must not be negative',
+      'oee.error.wholeNumber': 'Enter a whole number — units are counted individually',
+      'oee.error.plannedZero': 'Planned time must be greater than 0',
+      'oee.error.cycleZero': 'Ideal cycle time must be greater than 0',
+      'oee.error.unitsZero': 'Total units must be greater than 0',
+      'oee.error.downtimeOver': 'Downtime cannot exceed planned production time',
+      'oee.error.noOperatingTime': 'Downtime equals planned time, leaving no operating time',
+      'oee.error.defectsOver': 'Defective units cannot exceed total units produced',
+
+      'pricing.label': 'Sec. 04 — Plans',
       'pricing.title': 'Pricing',
       'pricing.demoStrong': 'Demonstration only.',
       'pricing.demoText': 'These plans are examples. No payments or subscriptions are available.',
@@ -275,7 +317,7 @@
 
       'modules.label': 'Böl. 01 — Araç dizini',
       'modules.title': 'Modüller',
-      'modules.intro': 'Bugün bir araç kullanıma hazır. Aynı temel üzerinde üç araç daha geliştiriliyor.',
+      'modules.intro': 'Bugün iki araç kullanıma hazır. Aynı temel üzerinde iki araç daha geliştiriliyor.',
       'tool.word': 'Araç',
       'tool.open': 'Aracı aç',
       'tool1.desc': 'Uzunluk, kütle, basınç, enerji ve sıcaklık için birim dönüştürücü.',
@@ -300,7 +342,48 @@
       'error.absoluteZero': 'Mutlak sıfırın (0 K) altında — daha yüksek bir sıcaklık girin',
       'note.negative': 'Negatif değerler {category} için olağan dışıdır',
 
-      'pricing.label': 'Böl. 03 — Planlar',
+      'oee.label': 'Böl. 03 — Araç 02',
+      'oee.intro': 'Bir üretim dönemine ait değerleri girin; kullanılabilirlik, performans, kalite ve OEE hesaplansın.',
+      'oee.inputs': 'Üretim girdileri',
+      'oee.planned': 'Planlanan üretim süresi',
+      'oee.downtime': 'Duruş süresi',
+      'oee.cycle': 'İdeal çevrim süresi',
+      'oee.units': 'Üretilen toplam adet',
+      'oee.defects': 'Hatalı adet',
+      'oee.unit.min': 'dk',
+      'oee.unit.minPerUnit': 'dk/adet',
+      'oee.unit.units': 'adet',
+      'oee.overall': 'Genel ekipman etkinliği',
+      'oee.formulaLabel': 'Kullanılabilirlik × Performans × Kalite',
+      'oee.availability': 'Kullanılabilirlik',
+      'oee.performance': 'Performans',
+      'oee.quality': 'Kalite',
+      'oee.lowestTag': 'En düşük',
+      'oee.detail.availability': 'Planlanan {b} dk içinde {a} dk çalışma',
+      'oee.detail.performance': 'Olası {b} adetten {a} adet',
+      'oee.detail.quality': '{b} adetten {a} sağlam adet',
+      'oee.operating': 'Çalışma süresi',
+      'oee.good': 'Sağlam adet',
+      'oee.analysis': 'Performans analizi',
+      'oee.analysis.lowest': 'En düşük bileşen: {component} ({value})',
+      'oee.suggest.availability': 'Duruş nedenlerini, ekipman arızalarını ve bakım planlamasını gözden geçirin.',
+      'oee.suggest.performance': 'Çevrim sürelerini, küçük duruşları ve üretim hızı kayıplarını gözden geçirin.',
+      'oee.suggest.quality': 'Hatalı ürünleri, süreç değişkenliğini ve kalite kontrolü gözden geçirin.',
+      'oee.disclaimer': 'Bu öneriler genel yönlendirmedir; kesin bir teşhis değildir.',
+      'oee.warning.over100': 'Performans %100’ün üzerinde. Çalışma süresinde, ideal çevrim süresinin izin verdiğinden fazla adet üretilmiş görünüyor; girdiler tutarsız olabilir. İdeal çevrim süresini, adet sayısını ve duruş süresini kontrol edin. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
+      'oee.invalid.title': 'Sonuçlar gösterilemiyor',
+      'oee.invalid.text': 'Sonuçları görmek için işaretli girdileri düzeltin.',
+      'oee.error.required': 'Bir değer girin',
+      'oee.error.negative': 'Negatif olamaz',
+      'oee.error.wholeNumber': 'Tam sayı girin — adetler tek tek sayılır',
+      'oee.error.plannedZero': 'Planlanan süre 0’dan büyük olmalıdır',
+      'oee.error.cycleZero': 'İdeal çevrim süresi 0’dan büyük olmalıdır',
+      'oee.error.unitsZero': 'Toplam adet 0’dan büyük olmalıdır',
+      'oee.error.downtimeOver': 'Duruş süresi planlanan üretim süresini aşamaz',
+      'oee.error.noOperatingTime': 'Duruş süresi planlanan süreye eşit; çalışma süresi kalmıyor',
+      'oee.error.defectsOver': 'Hatalı adet, üretilen toplam adedi aşamaz',
+
+      'pricing.label': 'Böl. 04 — Planlar',
       'pricing.title': 'Fiyatlandırma',
       'pricing.demoStrong': 'Yalnızca gösterim amaçlıdır.',
       'pricing.demoText': 'Bu planlar örnektir. Ödeme veya abonelik alınmamaktadır.',
@@ -499,10 +582,102 @@
     return { status: 'ok', value, input: parsed.value, noteKey };
   }
 
-  // Lets the conversion logic be tested from Node without a browser.
+  /* --- OEE (Overall Equipment Effectiveness) --- */
+
+  const OEE_FIELDS = ['plannedTime', 'downtime', 'idealCycleTime', 'totalUnits', 'defectiveUnits'];
+  const OEE_COUNT_FIELDS = ['totalUnits', 'defectiveUnits']; // product counts: whole numbers only
+  const OEE_COMPONENTS = ['availability', 'performance', 'quality'];
+
+  // All results are full-precision ratios (0.875, not 87.5). Nothing is rounded
+  // or capped here; performance may legitimately come out above 1.
+  function calculateOee({ plannedTime, downtime, idealCycleTime, totalUnits, defectiveUnits }) {
+    const operatingTime = plannedTime - downtime;
+    const goodUnits = totalUnits - defectiveUnits;
+    const availability = operatingTime / plannedTime;
+    const performance = (idealCycleTime * totalUnits) / operatingTime;
+    const quality = goodUnits / totalUnits;
+    return { operatingTime, goodUnits, availability, performance, quality, oee: availability * performance * quality };
+  }
+
+  // Checks parsed numbers against the OEE rules. Returns { field: messageKey }
+  // for each field that breaks one; fields that are missing are skipped.
+  function validateOeeInputs(values) {
+    const errors = {};
+    const has = (field) => typeof values[field] === 'number';
+    const flag = (field, key) => {
+      if (!errors[field]) errors[field] = key;
+    };
+
+    OEE_FIELDS.forEach((field) => {
+      if (has(field) && values[field] < 0) flag(field, 'oee.error.negative');
+    });
+    OEE_COUNT_FIELDS.forEach((field) => {
+      if (has(field) && !Number.isInteger(values[field])) flag(field, 'oee.error.wholeNumber');
+    });
+    if (values.plannedTime === 0) flag('plannedTime', 'oee.error.plannedZero');
+    if (values.idealCycleTime === 0) flag('idealCycleTime', 'oee.error.cycleZero');
+    if (values.totalUnits === 0) flag('totalUnits', 'oee.error.unitsZero');
+
+    if (has('plannedTime') && has('downtime') && !errors.plannedTime && !errors.downtime) {
+      if (values.downtime > values.plannedTime) flag('downtime', 'oee.error.downtimeOver');
+      else if (values.downtime === values.plannedTime) flag('downtime', 'oee.error.noOperatingTime');
+    }
+    if (has('totalUnits') && has('defectiveUnits') && !errors.totalUnits && !errors.defectiveUnits) {
+      if (values.defectiveUnits > values.totalUnits) flag('defectiveUnits', 'oee.error.defectsOver');
+    }
+    return errors;
+  }
+
+  // The weakest of the three components; on an exact tie the earlier one wins.
+  function lowestOeeComponent(result) {
+    return OEE_COMPONENTS.reduce((lowest, name) => (result[name] < result[lowest] ? name : lowest));
+  }
+
+  // Full pipeline: parse the five typed inputs, validate, calculate.
+  // rawInputs: { plannedTime: '480', ... } as typed, in `lang` number format.
+  // Returns { status: 'ok', values, result, lowest, performanceOver100 }
+  //      or { status: 'error', fieldErrors } — never a result built on bad input.
+  function evaluateOee(rawInputs, lang) {
+    const values = {};
+    const fieldErrors = {};
+    OEE_FIELDS.forEach((field) => {
+      const parsed = parseInput(rawInputs[field] === undefined ? '' : rawInputs[field], lang);
+      if (parsed.status === 'empty') fieldErrors[field] = 'oee.error.required';
+      else if (parsed.status === 'invalid') fieldErrors[field] = 'error.invalid';
+      else if (!Number.isFinite(parsed.value)) fieldErrors[field] = 'error.tooLarge';
+      else values[field] = parsed.value;
+    });
+    Object.assign(fieldErrors, validateOeeInputs(values));
+    if (Object.keys(fieldErrors).length > 0) return { status: 'error', fieldErrors };
+
+    const result = calculateOee(values);
+    if (!OEE_COMPONENTS.every((name) => Number.isFinite(result[name]))) {
+      return { status: 'error', fieldErrors: { idealCycleTime: 'error.tooLarge' } };
+    }
+    return {
+      status: 'ok',
+      values,
+      result,
+      lowest: lowestOeeComponent(result),
+      performanceOver100: result.performance > 1 + 1e-9,
+    };
+  }
+
+  // Ratio -> percentage with two decimals: "87.50%" (en), "%87,50" (tr).
+  function formatPercent(ratio, lang) {
+    if (!Number.isFinite(ratio)) return EMPTY_RESULT;
+    return ratio.toLocaleString(localeOf(lang).tag, {
+      style: 'percent',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  // Lets the calculation logic be tested from Node without a browser.
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
       CATEGORIES, I18N, translate, convert, normalizeInput, parseInput, localizeInput, formatNumber, toPlainString, evaluate,
+      calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent,
     };
   }
   if (typeof document === 'undefined') return;
@@ -714,7 +889,116 @@
   }
 
   /* ------------------------------------------------------------------------
-     5. Site UI
+     5. OEE calculator UI
+     ------------------------------------------------------------------------ */
+  function initOee() {
+    const form = document.getElementById('oee-form');
+    if (!form) return;
+
+    const byId = (id) => document.getElementById(id);
+    const inputs = {
+      plannedTime: byId('oee-planned'),
+      downtime: byId('oee-downtime'),
+      idealCycleTime: byId('oee-cycle'),
+      totalUnits: byId('oee-units'),
+      defectiveUnits: byId('oee-defects'),
+    };
+    const overallValue = byId('oee-value');
+    const overallBar = byId('oee-bar');
+    const formulaEl = byId('oee-formula');
+    const operatingEl = byId('oee-operating');
+    const goodEl = byId('oee-good');
+    const analysisTitle = byId('oee-analysis-title');
+    const analysisText = byId('oee-analysis-text');
+    const warningEl = byId('oee-warning');
+    const disclaimerEl = byId('oee-disclaimer');
+
+    // The bar is only a picture of the number beside it: it stops at full
+    // width, and is-over marks a value above 100% (the number is never capped).
+    function setMeter(meter, ratio) {
+      const shown = Number.isFinite(ratio) ? Math.min(Math.max(ratio, 0), 1) : 0;
+      meter.firstElementChild.style.width = shown * 100 + '%';
+      meter.classList.toggle('is-over', Number.isFinite(ratio) && ratio > 1 + 1e-9);
+    }
+
+    function showFieldErrors(fieldErrors) {
+      OEE_FIELDS.forEach((field) => {
+        const key = fieldErrors[field];
+        inputs[field].setAttribute('aria-invalid', String(Boolean(key)));
+        byId(inputs[field].id + '-error').textContent = key ? t(key) : '';
+      });
+    }
+
+    function showComponent(name, ratio, detail, isLowest) {
+      byId('oee-' + name + '-value').textContent = formatPercent(ratio, lang);
+      byId('oee-' + name + '-detail').textContent = detail;
+      byId('oee-' + name + '-card').classList.toggle('is-lowest', isLowest);
+      byId('oee-' + name + '-tag').hidden = !isLowest;
+      setMeter(byId('oee-' + name + '-bar'), ratio);
+    }
+
+    function update() {
+      const raw = {};
+      OEE_FIELDS.forEach((field) => {
+        raw[field] = inputs[field].value;
+      });
+      const outcome = evaluateOee(raw, lang);
+      const isOk = outcome.status === 'ok';
+      const number = (n) => formatNumber(n, lang);
+
+      showFieldErrors(isOk ? {} : outcome.fieldErrors);
+      warningEl.hidden = !(isOk && outcome.performanceOver100);
+      disclaimerEl.hidden = !isOk;
+
+      if (!isOk) {
+        overallValue.textContent = EMPTY_RESULT;
+        setMeter(overallBar, NaN);
+        formulaEl.textContent = '';
+        operatingEl.textContent = EMPTY_RESULT;
+        goodEl.textContent = EMPTY_RESULT;
+        OEE_COMPONENTS.forEach((name) => showComponent(name, NaN, '', false));
+        analysisTitle.textContent = t('oee.invalid.title');
+        analysisText.textContent = t('oee.invalid.text');
+        return;
+      }
+
+      const { values, result, lowest } = outcome;
+      const details = {
+        availability: t('oee.detail.availability', { a: number(result.operatingTime), b: number(values.plannedTime) }),
+        performance: t('oee.detail.performance', {
+          a: number(values.totalUnits),
+          b: number(result.operatingTime / values.idealCycleTime),
+        }),
+        quality: t('oee.detail.quality', { a: number(result.goodUnits), b: number(values.totalUnits) }),
+      };
+
+      overallValue.textContent = formatPercent(result.oee, lang);
+      setMeter(overallBar, result.oee);
+      formulaEl.textContent =
+        OEE_COMPONENTS.map((name) => formatPercent(result[name], lang)).join(' × ') + ' = ' + formatPercent(result.oee, lang);
+      operatingEl.textContent = number(result.operatingTime);
+      goodEl.textContent = number(result.goodUnits);
+      OEE_COMPONENTS.forEach((name) => showComponent(name, result[name], details[name], name === lowest));
+      analysisTitle.textContent = t('oee.analysis.lowest', {
+        component: t('oee.' + lowest),
+        value: formatPercent(result[lowest], lang),
+      });
+      analysisText.textContent = t('oee.suggest.' + lowest);
+    }
+
+    OEE_FIELDS.forEach((field) => inputs[field].addEventListener('input', update));
+    form.addEventListener('submit', (event) => event.preventDefault());
+    languageListeners.push((previousLang) => {
+      OEE_FIELDS.forEach((field) => {
+        inputs[field].value = localizeInput(inputs[field].value, previousLang, lang);
+      });
+      update();
+    });
+    update();
+  }
+
+  /* ------------------------------------------------------------------------
+     6. Site UI
      ------------------------------------------------------------------------ */
 
   // Writes the current language into every element marked with data-i18n
@@ -835,6 +1119,7 @@
   initLanguage();
   initConvertLab();
   initHeroPreview();
+  initOee();
   initTheme();
   initNav();
   initReveal();

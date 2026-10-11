@@ -65,6 +65,7 @@
       <div class="nav-menu" id="nav-menu">
         <a href="#modules" data-i18n="nav.modules">Modules</a>
         <a href="#convertlab">ConvertLab</a>
+        <a href="#oee">OEE</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
         <a class="btn btn-primary btn-small" href="#convertlab" data-i18n="nav.open">Open ConvertLab</a>
       </div>
@@ -103,7 +104,7 @@
             <a class="btn btn-secondary" href="#modules" data-i18n="hero.explore">Explore Modules</a>
           </div>
           <dl class="spec-row">
-            <div><dt data-i18n="spec.tools">Tools</dt><dd>01 <span data-i18n="spec.of">of 04</span></dd></div>
+            <div><dt data-i18n="spec.tools">Tools</dt><dd>02 <span data-i18n="spec.of">of 04</span></dd></div>
             <div><dt data-i18n="spec.categories">Categories</dt><dd>05</dd></div>
             <div><dt data-i18n="spec.units">Units</dt><dd>34</dd></div>
           </dl>
@@ -176,7 +177,7 @@
         <header class="section-head reveal">
           <p class="tech-label" data-i18n="modules.label">Sec. 01 — Tool directory</p>
           <h2 id="modules-title" data-i18n="modules.title">Modules</h2>
-          <p data-i18n="modules.intro">One tool is available today. Three more are in development on the same foundation.</p>
+          <p data-i18n="modules.intro">Two tools are available today. Two more are in development on the same foundation.</p>
         </header>
 
         <div class="tool-grid">
@@ -204,10 +205,10 @@
             <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
 
-          <article class="tool-card reveal">
+          <article class="tool-card tool-card-live reveal">
             <div class="tool-meta">
               <span class="tech-label"><span data-i18n="tool.word">Tool</span> 02</span>
-              <span class="status status-soon" data-i18n="status.soon">Coming Soon</span>
+              <span class="status status-live" data-i18n="status.available">Available</span>
             </div>
             <div class="tool-art">
               <svg class="ill" viewBox="0 0 240 132" aria-hidden="true" focusable="false">
@@ -234,8 +235,9 @@
                 <text class="note" x="222" y="124" text-anchor="end" data-i18n="svg.flow">FLOW →</text>
               </svg>
             </div>
-            <h3 data-i18n="tool2.title">Production Efficiency &amp; OEE</h3>
+            <h3><a class="stretched-link" href="#oee" data-i18n="tool2.title">Production Efficiency &amp; OEE</a></h3>
             <p data-i18n="tool2.desc">Availability, performance and quality combined into overall equipment effectiveness.</p>
+            <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
 
           <article class="tool-card reveal">
@@ -374,11 +376,128 @@
       </div>
     </section>
 
-    <!-- Pricing (demonstration only) -->
-    <section class="section section-tint" id="pricing" aria-labelledby="pricing-title">
+    <!-- Production Efficiency & OEE calculator -->
+    <section class="section section-tint" id="oee" aria-labelledby="oee-title">
       <div class="container">
         <header class="section-head reveal">
-          <p class="tech-label" data-i18n="pricing.label">Sec. 03 — Plans</p>
+          <p class="tech-label" data-i18n="oee.label">Sec. 03 — Tool 02</p>
+          <h2 id="oee-title" data-i18n="tool2.title">Production Efficiency &amp; OEE</h2>
+          <p data-i18n="oee.intro">Enter the figures for one production run to see availability, performance, quality and OEE.</p>
+        </header>
+
+        <div class="oee reveal">
+          <form class="oee-inputs" id="oee-form" novalidate aria-label="Production inputs" data-i18n-attr="aria-label:oee.inputs">
+            <p class="tech-label" data-i18n="oee.inputs">Production inputs</p>
+
+            <div class="field">
+              <label class="field-label" for="oee-planned" data-i18n="oee.planned">Planned production time</label>
+              <div class="field-box">
+                <input class="field-value" id="oee-planned" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="480" aria-describedby="oee-planned-error" aria-invalid="false">
+                <span class="unit-tag" data-i18n="oee.unit.min">min</span>
+              </div>
+              <p class="field-error" id="oee-planned-error"></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="oee-downtime" data-i18n="oee.downtime">Downtime</label>
+              <div class="field-box">
+                <input class="field-value" id="oee-downtime" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="60" aria-describedby="oee-downtime-error" aria-invalid="false">
+                <span class="unit-tag" data-i18n="oee.unit.min">min</span>
+              </div>
+              <p class="field-error" id="oee-downtime-error"></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="oee-cycle" data-i18n="oee.cycle">Ideal cycle time</label>
+              <div class="field-box">
+                <input class="field-value" id="oee-cycle" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1" aria-describedby="oee-cycle-error" aria-invalid="false">
+                <span class="unit-tag" data-i18n="oee.unit.minPerUnit">min/unit</span>
+              </div>
+              <p class="field-error" id="oee-cycle-error"></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="oee-units" data-i18n="oee.units">Total units produced</label>
+              <div class="field-box">
+                <input class="field-value" id="oee-units" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="350" aria-describedby="oee-units-error" aria-invalid="false">
+                <span class="unit-tag" data-i18n="oee.unit.units">units</span>
+              </div>
+              <p class="field-error" id="oee-units-error"></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="oee-defects" data-i18n="oee.defects">Defective units</label>
+              <div class="field-box">
+                <input class="field-value" id="oee-defects" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="15" aria-describedby="oee-defects-error" aria-invalid="false">
+                <span class="unit-tag" data-i18n="oee.unit.units">units</span>
+              </div>
+              <p class="field-error" id="oee-defects-error"></p>
+            </div>
+          </form>
+
+          <div class="oee-results" aria-live="polite">
+            <div class="oee-headline">
+              <p class="tech-label" data-i18n="oee.overall">Overall equipment effectiveness</p>
+              <p class="oee-figure"><output id="oee-value" for="oee-planned oee-downtime oee-cycle oee-units oee-defects">—</output> <span class="oee-figure-name">OEE</span></p>
+              <div class="meter meter-lg" id="oee-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+              <p class="tech-label oee-formula-label" data-i18n="oee.formulaLabel">Availability × Performance × Quality</p>
+              <p class="readout" id="oee-formula"></p>
+            </div>
+
+            <div class="metric-grid">
+              <article class="metric" id="oee-availability-card">
+                <div class="metric-head">
+                  <h3 data-i18n="oee.availability">Availability</h3>
+                  <span class="status status-live" id="oee-availability-tag" data-i18n="oee.lowestTag" hidden>Lowest</span>
+                </div>
+                <p class="metric-value" id="oee-availability-value">—</p>
+                <div class="meter" id="oee-availability-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+                <p class="metric-detail" id="oee-availability-detail"></p>
+              </article>
+
+              <article class="metric" id="oee-performance-card">
+                <div class="metric-head">
+                  <h3 data-i18n="oee.performance">Performance</h3>
+                  <span class="status status-live" id="oee-performance-tag" data-i18n="oee.lowestTag" hidden>Lowest</span>
+                </div>
+                <p class="metric-value" id="oee-performance-value">—</p>
+                <div class="meter" id="oee-performance-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+                <p class="metric-detail" id="oee-performance-detail"></p>
+              </article>
+
+              <article class="metric" id="oee-quality-card">
+                <div class="metric-head">
+                  <h3 data-i18n="oee.quality">Quality</h3>
+                  <span class="status status-live" id="oee-quality-tag" data-i18n="oee.lowestTag" hidden>Lowest</span>
+                </div>
+                <p class="metric-value" id="oee-quality-value">—</p>
+                <div class="meter" id="oee-quality-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+                <p class="metric-detail" id="oee-quality-detail"></p>
+              </article>
+            </div>
+
+            <dl class="oee-facts">
+              <div><dt data-i18n="oee.operating">Operating time</dt><dd><span id="oee-operating">—</span> <span data-i18n="oee.unit.min">min</span></dd></div>
+              <div><dt data-i18n="oee.good">Good units</dt><dd><span id="oee-good">—</span> <span data-i18n="oee.unit.units">units</span></dd></div>
+            </dl>
+
+            <section class="oee-analysis" aria-labelledby="oee-analysis-label">
+              <p class="tech-label" id="oee-analysis-label" data-i18n="oee.analysis">Performance analysis</p>
+              <p class="oee-analysis-title" id="oee-analysis-title"></p>
+              <p id="oee-analysis-text"></p>
+              <p class="oee-warning" id="oee-warning" data-i18n="oee.warning.over100" hidden>Performance is above 100%. More units were produced than the ideal cycle time allows in the operating time, so the inputs may be inconsistent. Check the ideal cycle time, unit count and downtime. The value is shown as calculated, not capped.</p>
+              <p class="oee-disclaimer" id="oee-disclaimer" data-i18n="oee.disclaimer">These suggestions are general guidance, not a definitive diagnosis.</p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing (demonstration only) -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="tech-label" data-i18n="pricing.label">Sec. 04 — Plans</p>
           <h2 id="pricing-title" data-i18n="pricing.title">Pricing</h2>
           <p class="demo-note"><strong data-i18n="pricing.demoStrong">Demonstration only.</strong> <span data-i18n="pricing.demoText">These plans are examples. No payments or subscriptions are available.</span></p>
         </header>
@@ -426,6 +545,7 @@
       <nav class="footer-links" aria-label="Footer" data-i18n-attr="aria-label:a11y.footerNav">
         <a href="#modules" data-i18n="nav.modules">Modules</a>
         <a href="#convertlab">ConvertLab</a>
+        <a href="#oee">OEE</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
       </nav>
       <p class="footer-note">&copy; <span id="footer-year">2026</span> <span data-i18n="footer.note">IE Toolkit. Built for industrial engineers.</span></p>
