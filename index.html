@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IE Toolkit — Industrial Engineering Toolkit</title>
+  <meta name="description" content="IE Toolkit is a growing set of tools for industrial engineering students and professionals, starting with the ConvertLab unit converter.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Shared SVG definitions. Gradient stops and shapes take their colours from
+       the --ill-* tokens in style.css, so a future theme only redefines tokens. -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="g-pale" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" class="stop-1"/>
+        <stop offset="1" class="stop-2"/>
+      </linearGradient>
+      <linearGradient id="g-mid" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" class="stop-3"/>
+        <stop offset="1" class="stop-4"/>
+      </linearGradient>
+      <linearGradient id="g-deep" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" class="stop-4"/>
+        <stop offset="1" class="stop-5"/>
+      </linearGradient>
+      <symbol id="sparkle" viewBox="-10 -10 20 20" overflow="visible">
+        <path d="M0-10C1-3 3-1 10 0 3 1 1 3 0 10-1 3-3 1-10 0-3-1-1-3 0-10Z"/>
+      </symbol>
+      <symbol id="logo-mark" viewBox="0 0 40 40">
+        <rect width="40" height="40" rx="12" fill="url(#g-deep)"/>
+        <path class="s-surface" d="M11 27 20 12l9 10-18 5 17 3-1-8" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+        <circle class="i-surface" cx="11" cy="27" r="3.4"/>
+        <circle class="i-surface" cx="20" cy="12" r="3.4"/>
+        <circle class="i-surface" cx="29" cy="22" r="3.4"/>
+        <circle class="i-surface" cx="28" cy="30" r="2.6"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main">
+      <a class="brand" href="#top" aria-label="IE Toolkit home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#logo-mark"/></svg>
+        <span class="brand-name">IE Toolkit</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+        <a href="#convertlab">ConvertLab</a>
+        <a href="#modules">Modules</a>
+        <a href="#pricing">Pricing</a>
+        <a class="btn btn-primary btn-small" href="#convertlab">Open ConvertLab</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Industrial Engineering Toolkit</p>
+          <h1>The everyday tools of industrial engineering, in one calm place.</h1>
+          <p class="lead">IE Toolkit is a growing workspace for students and professionals. It starts with ConvertLab, a fast and accurate unit converter, with production, inventory and capacity tools on the way.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#convertlab">Open ConvertLab</a>
+            <a class="btn btn-ghost" href="#modules">See what's coming</a>
+          </div>
+        </div>
+
+        <div class="hero-art reveal">
+          <svg viewBox="0 0 480 400" aria-hidden="true" focusable="false">
+            <rect x="46" y="44" width="388" height="312" rx="84" fill="url(#g-pale)" transform="rotate(-4 240 200)"/>
+            <g class="lift">
+              <rect class="i-surface" x="88" y="92" width="304" height="220" rx="28"/>
+            </g>
+            <path class="s-3" fill="none" stroke-width="4" stroke-linecap="round" d="M140 156 222 136 312 164M140 156 184 232 222 136 270 246 312 164 342 236 270 246 184 232"/>
+            <circle cx="140" cy="156" r="17" fill="url(#g-mid)"/>
+            <circle cx="222" cy="136" r="21" fill="url(#g-deep)"/>
+            <circle cx="312" cy="164" r="17" fill="url(#g-mid)"/>
+            <circle cx="184" cy="232" r="15" fill="url(#g-deep)"/>
+            <circle cx="270" cy="246" r="19" fill="url(#g-mid)"/>
+            <circle cx="342" cy="236" r="13" fill="url(#g-deep)"/>
+            <circle class="i-surface" cx="222" cy="136" r="7"/>
+            <circle class="i-surface" cx="140" cy="156" r="5"/>
+            <circle class="i-surface" cx="312" cy="164" r="5"/>
+            <circle class="i-surface" cx="184" cy="232" r="4.5"/>
+            <circle class="i-surface" cx="270" cy="246" r="6"/>
+            <circle class="i-surface" cx="342" cy="236" r="4"/>
+
+            <g class="lift">
+              <rect class="i-surface" x="330" y="46" width="104" height="76" rx="18"/>
+              <rect class="i-2" x="348" y="86" width="14" height="20" rx="5"/>
+              <rect class="i-3" x="368" y="74" width="14" height="32" rx="5"/>
+              <rect class="i-4" x="388" y="80" width="14" height="26" rx="5"/>
+              <rect class="i-5" x="408" y="62" width="14" height="44" rx="5"/>
+            </g>
+            <g class="lift">
+              <rect class="i-surface" x="46" y="272" width="124" height="60" rx="18"/>
+              <circle cx="78" cy="302" r="16" fill="url(#g-deep)"/>
+              <path class="s-surface" d="m71 302 5 5 9-10" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect class="i-3" x="104" y="290" width="48" height="8" rx="4"/>
+              <rect class="i-2" x="104" y="306" width="32" height="8" rx="4"/>
+            </g>
+
+            <use class="i-4" href="#sparkle" x="58" y="96" width="26" height="26"/>
+            <use class="i-3" href="#sparkle" x="408" y="296" width="20" height="20"/>
+            <circle class="i-4" cx="300" cy="36" r="5"/>
+            <circle class="i-3" cx="210" cy="356" r="6"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ConvertLab -->
+    <section class="section" id="convertlab" aria-labelledby="convertlab-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Module 01</p>
+          <h2 id="convertlab-title">ConvertLab</h2>
+          <p>Convert between engineering units instantly. Pick a category, type a value, and the result updates as you go.</p>
+        </header>
+
+        <div class="converter reveal">
+          <div class="converter-main">
+            <div class="tabs" id="cl-tabs" role="tablist" aria-label="Conversion category"></div>
+
+            <div class="converter-panel" id="cl-panel" role="tabpanel">
+              <div class="converter-row">
+                <div class="field">
+                  <label class="field-label" for="cl-value">From</label>
+                  <div class="field-box">
+                    <input class="field-value" id="cl-value" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1" aria-describedby="cl-message" aria-invalid="false">
+                    <label class="visually-hidden" for="cl-from">From unit</label>
+                    <select class="field-unit" id="cl-from"></select>
+                  </div>
+                </div>
+
+                <button class="swap-btn" id="cl-swap" type="button" aria-label="Swap units" title="Swap units">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11m0 0-3.5-3.5M18 7l-3.5 3.5M17 17H6m0 0 3.5-3.5M6 17l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+
+                <div class="field">
+                  <label class="field-label" for="cl-result">To</label>
+                  <div class="field-box field-box-result">
+                    <output class="field-value" id="cl-result" for="cl-value cl-from cl-to" aria-live="polite">—</output>
+                    <label class="visually-hidden" for="cl-to">To unit</label>
+                    <select class="field-unit" id="cl-to"></select>
+                  </div>
+                </div>
+              </div>
+
+              <p class="converter-message" id="cl-message" aria-live="polite"></p>
+              <p class="converter-summary" id="cl-summary"></p>
+            </div>
+          </div>
+
+          <div class="converter-art">
+            <svg viewBox="0 0 360 420" aria-hidden="true" focusable="false">
+              <circle cx="180" cy="210" r="150" fill="url(#g-pale)"/>
+
+              <g class="lift" transform="rotate(-40 180 210)">
+                <rect x="20" y="170" width="320" height="76" rx="18" fill="url(#g-mid)"/>
+                <rect class="i-surface" x="20" y="170" width="320" height="76" rx="18" opacity=".14"/>
+                <path class="s-surface" d="M40 178h284" fill="none" stroke-width="16" stroke-dasharray="3 11"/>
+                <path class="s-surface" d="M40 186h284" fill="none" stroke-width="32" stroke-dasharray="3 67"/>
+                <g class="ruler-num" text-anchor="middle">
+                  <text x="41.5" y="230">0</text>
+                  <text x="111.5" y="230">1</text>
+                  <text x="181.5" y="230">2</text>
+                  <text x="251.5" y="230">3</text>
+                  <text x="321.5" y="230">4</text>
+                </g>
+              </g>
+
+              <g class="lift">
+                <rect class="i-surface" x="34" y="44" width="72" height="50" rx="17"/>
+                <text class="chip-text" x="70" y="76" text-anchor="middle">°C</text>
+              </g>
+              <g class="lift">
+                <circle class="i-surface" cx="128" cy="140" r="27"/>
+                <text class="chip-text" x="128" y="147" text-anchor="middle">Pa</text>
+              </g>
+              <g class="lift">
+                <rect class="i-surface" x="254" y="326" width="72" height="50" rx="17"/>
+                <text class="chip-text" x="290" y="358" text-anchor="middle">kg</text>
+              </g>
+              <g class="lift">
+                <circle cx="224" cy="290" r="24" fill="url(#g-deep)"/>
+                <path class="s-surface" d="M213 285h20l-5-5m5 15h-20l5 5" fill="none" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+
+              <use class="i-4" href="#sparkle" x="168" y="34" width="24" height="24"/>
+              <use class="i-3" href="#sparkle" x="130" y="372" width="20" height="20"/>
+              <use class="i-4" href="#sparkle" x="322" y="236" width="16" height="16"/>
+              <circle class="i-3" cx="24" cy="204" r="6"/>
+              <circle class="i-4" cx="226" cy="394" r="4"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future modules -->
+    <section class="section section-tint" id="modules" aria-labelledby="modules-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">On the roadmap</p>
+          <h2 id="modules-title">More engineering tools are on the way</h2>
+          <p>ConvertLab is the first module. These three are next, built on the same foundation.</p>
+        </header>
+
+        <div class="card-grid">
+          <article class="module-card reveal">
+            <div class="module-art">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect x="10" y="12" width="220" height="136" rx="38" fill="url(#g-pale)"/>
+                <g class="lift">
+                  <rect class="i-surface" x="138" y="24" width="80" height="52" rx="12"/>
+                  <rect class="i-2" x="150" y="54" width="10" height="12" rx="3"/>
+                  <rect class="i-3" x="165" y="46" width="10" height="20" rx="3"/>
+                  <rect class="i-3" x="180" y="50" width="10" height="16" rx="3"/>
+                  <rect class="i-4" x="195" y="40" width="10" height="26" rx="3"/>
+                  <path class="s-5" d="m151 48 18-9 14 5 20-12" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <g class="lift">
+                  <rect x="56" y="72" width="36" height="32" rx="7" fill="url(#g-mid)"/>
+                  <rect class="i-surface" x="71" y="72" width="6" height="13" rx="2" opacity=".8"/>
+                  <rect class="i-3" x="100" y="82" width="26" height="22" rx="6"/>
+                  <rect x="26" y="104" width="118" height="24" rx="12" fill="url(#g-deep)"/>
+                  <circle class="i-surface" cx="40" cy="116" r="5.5"/>
+                  <circle class="i-surface" cx="62" cy="116" r="5.5"/>
+                  <circle class="i-surface" cx="85" cy="116" r="5.5"/>
+                  <circle class="i-surface" cx="108" cy="116" r="5.5"/>
+                  <circle class="i-surface" cx="130" cy="116" r="5.5"/>
+                </g>
+                <g class="lift">
+                  <circle class="s-4" cx="176" cy="114" r="17" fill="none" stroke-width="8" stroke-dasharray="6.7 6.65"/>
+                  <circle class="i-4" cx="176" cy="114" r="15"/>
+                  <circle class="i-surface" cx="176" cy="114" r="6"/>
+                  <circle class="s-5" cx="207" cy="98" r="10" fill="none" stroke-width="6" stroke-dasharray="5.2 5.27"/>
+                  <circle class="i-5" cx="207" cy="98" r="8.5"/>
+                  <circle class="i-surface" cx="207" cy="98" r="3.5"/>
+                </g>
+                <use class="i-4" href="#sparkle" x="28" y="30" width="16" height="16"/>
+                <circle class="i-3" cx="112" cy="36" r="4"/>
+              </svg>
+            </div>
+            <span class="badge">Coming Soon</span>
+            <h3>Production Efficiency &amp; OEE Calculator</h3>
+            <p>Measure availability, performance and quality, and see how they combine into overall equipment effectiveness.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-art">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect x="10" y="12" width="220" height="136" rx="38" fill="url(#g-pale)"/>
+                <g class="lift">
+                  <rect x="30" y="90" width="52" height="42" rx="8" fill="url(#g-mid)"/>
+                  <rect class="i-surface" x="52" y="90" width="8" height="15" rx="2" opacity=".8"/>
+                  <rect x="86" y="90" width="52" height="42" rx="8" fill="url(#g-deep)"/>
+                  <rect class="i-surface" x="108" y="90" width="8" height="15" rx="2" opacity=".8"/>
+                  <rect class="i-3" x="58" y="46" width="52" height="42" rx="8"/>
+                  <rect class="i-surface" x="80" y="46" width="8" height="15" rx="2" opacity=".8"/>
+                  <rect class="i-surface" x="66" y="72" width="18" height="6" rx="3" opacity=".7"/>
+                </g>
+                <g class="lift">
+                  <rect class="i-surface" x="154" y="36" width="60" height="94" rx="12"/>
+                  <rect class="i-5" x="170" y="29" width="28" height="14" rx="7"/>
+                  <circle class="i-4" cx="169" cy="64" r="6.5"/>
+                  <path class="s-surface" d="m166 64 2.4 2.4 4-4.6" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect class="i-3" x="181" y="61" width="24" height="6" rx="3"/>
+                  <circle class="i-4" cx="169" cy="86" r="6.5"/>
+                  <path class="s-surface" d="m166 86 2.4 2.4 4-4.6" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect class="i-3" x="181" y="83" width="18" height="6" rx="3"/>
+                  <circle class="s-3" cx="169" cy="108" r="5.5" fill="none" stroke-width="2"/>
+                  <rect class="i-2" x="181" y="105" width="22" height="6" rx="3"/>
+                </g>
+                <use class="i-4" href="#sparkle" x="124" y="30" width="16" height="16"/>
+                <circle class="i-3" cx="34" cy="50" r="4"/>
+              </svg>
+            </div>
+            <span class="badge">Coming Soon</span>
+            <h3>Inventory Management</h3>
+            <p>Work through order quantities, reorder points and safety stock with clear inputs and worked results.</p>
+          </article>
+
+          <article class="module-card reveal">
+            <div class="module-art">
+              <svg viewBox="0 0 240 160" aria-hidden="true" focusable="false">
+                <rect x="10" y="12" width="220" height="136" rx="38" fill="url(#g-pale)"/>
+                <g class="lift">
+                  <rect class="i-surface" x="30" y="34" width="84" height="76" rx="13"/>
+                  <path d="M43 34h58a13 13 0 0 1 13 13v9H30v-9a13 13 0 0 1 13-13Z" fill="url(#g-deep)"/>
+                  <rect class="i-ink" x="50" y="27" width="6" height="15" rx="3"/>
+                  <rect class="i-ink" x="88" y="27" width="6" height="15" rx="3"/>
+                  <g class="i-2">
+                    <rect x="41" y="64" width="11" height="10" rx="3"/><rect x="58" y="64" width="11" height="10" rx="3"/><rect x="75" y="64" width="11" height="10" rx="3"/><rect x="92" y="64" width="11" height="10" rx="3"/>
+                    <rect x="41" y="79" width="11" height="10" rx="3"/><rect x="58" y="79" width="11" height="10" rx="3"/><rect x="92" y="79" width="11" height="10" rx="3"/>
+                    <rect x="41" y="94" width="11" height="10" rx="3"/><rect x="58" y="94" width="11" height="10" rx="3"/><rect x="75" y="94" width="11" height="10" rx="3"/>
+                  </g>
+                  <rect class="i-5" x="75" y="79" width="11" height="10" rx="3"/>
+                </g>
+                <g class="lift">
+                  <circle cx="170" cy="66" r="36" fill="url(#g-mid)"/>
+                  <circle class="i-surface" cx="170" cy="66" r="27"/>
+                  <path class="s-ink" d="M170 66V47m0 19 14 8" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle class="i-5" cx="170" cy="66" r="4"/>
+                </g>
+                <path class="s-3" d="M36 130h170" fill="none" stroke-width="4" stroke-linecap="round"/>
+                <path class="s-5" d="M36 130h72" fill="none" stroke-width="4" stroke-linecap="round"/>
+                <circle class="i-5" cx="54" cy="130" r="6"/>
+                <circle class="i-5" cx="108" cy="130" r="6"/>
+                <circle class="i-surface s-3" cx="158" cy="130" r="5" stroke-width="3"/>
+                <circle class="i-surface s-3" cx="200" cy="130" r="5" stroke-width="3"/>
+                <use class="i-4" href="#sparkle" x="122" y="22" width="14" height="14"/>
+              </svg>
+            </div>
+            <span class="badge">Coming Soon</span>
+            <h3>Capacity Planning</h3>
+            <p>Compare available time against demand, find bottlenecks, and plan shifts and resources with confidence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing (demonstration only) -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-title">Simple plans for students and professionals</h2>
+          <p class="demo-note">Demonstration only. No payments or subscriptions are available.</p>
+        </header>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <h3>Student</h3>
+            <p class="price"><span class="price-amount">$0</span><span class="price-period">/month</span></p>
+            <p class="price-desc">Everything you need for coursework and labs.</p>
+            <ul class="feature-list">
+              <li>ConvertLab unit converter</li>
+              <li>All five conversion categories</li>
+              <li>Works in any modern browser</li>
+            </ul>
+            <button class="btn btn-ghost btn-block" type="button" disabled>Demo plan</button>
+          </article>
+
+          <article class="price-card price-card-featured reveal">
+            <span class="badge badge-solid">Example</span>
+            <h3>Pro</h3>
+            <p class="price"><span class="price-amount">$4</span><span class="price-period">/month</span></p>
+            <p class="price-desc">For professionals who want every module as it ships.</p>
+            <ul class="feature-list">
+              <li>Everything in Student</li>
+              <li>Production Efficiency &amp; OEE Calculator</li>
+              <li>Inventory Management</li>
+              <li>Capacity Planning</li>
+            </ul>
+            <button class="btn btn-primary btn-block" type="button" disabled>Demo plan</button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#top" aria-label="IE Toolkit home">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#logo-mark"/></svg>
+        <span class="brand-name">IE Toolkit</span>
+      </a>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#convertlab">ConvertLab</a>
+        <a href="#modules">Modules</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <p class="footer-note">&copy; <span id="footer-year">2026</span> IE Toolkit. Built for industrial engineers.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
