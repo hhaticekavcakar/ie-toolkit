@@ -111,8 +111,8 @@
      ------------------------------------------------------------------------ */
   const I18N = {
     en: {
-      'meta.title': 'IE Toolkit — Industrial Engineering Workspace',
-      'meta.description': 'IE Toolkit is an engineering workspace for industrial engineering students and professionals, starting with the ConvertLab unit converter.',
+      'meta.title': 'IE Toolkit | Industrial Engineering Tools',
+      'meta.description': 'Unit Conversion · OEE · Inventory · Capacity Planning',
 
       'a11y.skip': 'Skip to content',
       'a11y.home': 'IE Toolkit home',
@@ -423,8 +423,8 @@
     },
 
     tr: {
-      'meta.title': 'IE Toolkit — Endüstri Mühendisliği Çalışma Alanı',
-      'meta.description': 'IE Toolkit, endüstri mühendisliği öğrencileri ve profesyonelleri için bir mühendislik çalışma alanıdır; ilk aracı ConvertLab birim dönüştürücüdür.',
+      'meta.title': 'IE Toolkit | Endüstri Mühendisliği Araçları',
+      'meta.description': 'Birim Dönüşümü · OEE · Envanter · Kapasite Planlama',
 
       'a11y.skip': 'İçeriğe geç',
       'a11y.home': 'IE Toolkit ana sayfa',
