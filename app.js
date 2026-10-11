@@ -145,7 +145,6 @@
       'preview.open': 'Open full converter',
 
       'status.available': 'Available',
-      'status.soon': 'Coming Soon',
 
       'modules.label': 'Sec. 01 — Tool directory',
       'modules.title': 'Modules',
@@ -268,6 +267,7 @@
       'inv.assume.2': 'Lead time is constant; only demand varies.',
       'inv.assume.3': 'Service level is the probability of not running out during one replenishment cycle, not the share of demand filled.',
       'inv.assume.4': 'EOQ assumes steady demand, fixed ordering and holding costs, and no quantity discounts.',
+      'inv.warning.days': 'Annual demand ÷ average daily demand implies {days} operating days per year, which is more than 365. The two demand figures are inconsistent: check annual demand and average daily demand.',
       'inv.warning.variability': 'The standard deviation is larger than average daily demand. A normal distribution fits such demand poorly, so treat this safety stock with caution.',
       'inv.invalid.ordering': 'Correct the highlighted ordering inputs to see EOQ and cost results.',
       'inv.invalid.replenishment': 'Correct the highlighted replenishment inputs to see safety stock and reorder point.',
@@ -293,7 +293,7 @@
       'cap.unit.day': 'units/day',
       'cap.unit.week': 'units/week',
       'cap.unit.month': 'units/month',
-      'cap.unit.perHour': 'units/h',
+      'cap.unit.perHour': 'units/hour',
       'cap.design': 'Design capacity',
       'cap.effective': 'Effective capacity',
       'cap.actual': 'Actual output',
@@ -305,7 +305,8 @@
       'cap.fact.unused': 'Unused design capacity',
       'cap.fact.allowance': 'Planned allowance (design − effective)',
       'cap.warning.effective': 'Actual output is above effective capacity, so efficiency exceeds 100%. The effective capacity or the output figure may be inconsistent; check that both cover the same period. The value is shown as calculated, not capped.',
-      'cap.warning.design': 'Actual output is above design capacity, so utilization exceeds 100%. Design capacity is the maximum possible output, so the inputs are inconsistent. The value is shown as calculated, not capped.',
+      'cap.warning.design': 'Actual output is {value} {unit} above design capacity, so utilization exceeds 100%. Design capacity is the maximum possible output, so the inputs are inconsistent. The value is shown as calculated, not capped.',
+      'cap.pending': 'Finish entering {stations} to update the bottleneck analysis.',
       'cap.error.effectiveOverDesign': 'Effective capacity cannot exceed design capacity',
       'cap.error.name': 'Enter a station name',
       'cap.invalid.capacity': 'Correct the highlighted capacity inputs to see utilization and efficiency.',
@@ -356,11 +357,13 @@
       'plan.period': '/month',
       'plan.button': 'Demo plan',
       'student.desc': 'For coursework and labs.',
-      'student.f1': 'ConvertLab unit converter',
-      'student.f2': 'All five conversion categories',
+      'student.f1': 'All four tools',
+      'student.f2': 'English and Turkish, light and dark themes',
       'student.f3': 'Works in any modern browser',
-      'pro.desc': 'Every module as it ships.',
+      'pro.desc': 'Example of a paid tier. These extras do not exist.',
       'pro.f1': 'Everything in Student',
+      'pro.f2': 'Saved scenarios (example)',
+      'pro.f3': 'Export to PDF and spreadsheet (example)',
 
       'footer.note': 'IE Toolkit. Built for industrial engineers.',
 
@@ -451,7 +454,6 @@
       'preview.open': 'Tam dönüştürücüyü aç',
 
       'status.available': 'Kullanılabilir',
-      'status.soon': 'Yakında',
 
       'modules.label': 'Böl. 01 — Araç dizini',
       'modules.title': 'Modüller',
@@ -574,6 +576,7 @@
       'inv.assume.2': 'Tedarik süresi sabittir; yalnızca talep değişir.',
       'inv.assume.3': 'Hizmet düzeyi, bir ikmal çevriminde stoksuz kalmama olasılığıdır; karşılanan talep oranı değildir.',
       'inv.assume.4': 'EOQ; sabit talep, sabit sipariş ve elde tutma maliyetleri ile miktar indirimi olmadığını varsayar.',
+      'inv.warning.days': 'Yıllık talep ÷ ortalama günlük talep, yılda {days} çalışma günü anlamına geliyor; bu 365’ten fazla. İki talep değeri tutarsız: yıllık talebi ve ortalama günlük talebi kontrol edin.',
       'inv.warning.variability': 'Standart sapma, ortalama günlük talepten büyük. Normal dağılım böyle bir talebe iyi uymaz; bu emniyet stoğunu ihtiyatla değerlendirin.',
       'inv.invalid.ordering': 'EOQ ve maliyet sonuçlarını görmek için işaretli sipariş girdilerini düzeltin.',
       'inv.invalid.replenishment': 'Emniyet stoğu ve yeniden sipariş noktasını görmek için işaretli ikmal girdilerini düzeltin.',
@@ -599,7 +602,7 @@
       'cap.unit.day': 'adet/gün',
       'cap.unit.week': 'adet/hafta',
       'cap.unit.month': 'adet/ay',
-      'cap.unit.perHour': 'adet/sa',
+      'cap.unit.perHour': 'adet/saat',
       'cap.design': 'Tasarım kapasitesi',
       'cap.effective': 'Etkin kapasite',
       'cap.actual': 'Gerçekleşen üretim',
@@ -611,7 +614,8 @@
       'cap.fact.unused': 'Kullanılmayan tasarım kapasitesi',
       'cap.fact.allowance': 'Planlı pay (tasarım − etkin)',
       'cap.warning.effective': 'Gerçekleşen üretim etkin kapasitenin üzerinde; bu nedenle verimlilik %100’ü aşıyor. Etkin kapasite veya üretim değeri tutarsız olabilir; ikisinin de aynı dönemi kapsadığını kontrol edin. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
-      'cap.warning.design': 'Gerçekleşen üretim tasarım kapasitesinin üzerinde; bu nedenle kullanım oranı %100’ü aşıyor. Tasarım kapasitesi mümkün olan en yüksek üretim olduğundan girdiler tutarsızdır. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
+      'cap.warning.design': 'Gerçekleşen üretim tasarım kapasitesinin {value} {unit} üzerinde; bu nedenle kullanım oranı %100’ü aşıyor. Tasarım kapasitesi mümkün olan en yüksek üretim olduğundan girdiler tutarsızdır. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
+      'cap.pending': '{stations} için girişleri tamamlayın; darboğaz analizi ardından güncellenir.',
       'cap.error.effectiveOverDesign': 'Etkin kapasite tasarım kapasitesini aşamaz',
       'cap.error.name': 'Bir istasyon adı girin',
       'cap.invalid.capacity': 'Kullanım oranı ve verimliliği görmek için işaretli kapasite girdilerini düzeltin.',
@@ -662,11 +666,13 @@
       'plan.period': '/ay',
       'plan.button': 'Demo planı',
       'student.desc': 'Dersler ve laboratuvarlar için.',
-      'student.f1': 'ConvertLab birim dönüştürücü',
-      'student.f2': 'Beş dönüşüm kategorisinin tümü',
+      'student.f1': 'Dört aracın tümü',
+      'student.f2': 'Türkçe ve İngilizce, açık ve koyu tema',
       'student.f3': 'Tüm modern tarayıcılarda çalışır',
-      'pro.desc': 'Yayınlandıkça her modül.',
+      'pro.desc': 'Ücretli plan örneği. Bu ek özellikler mevcut değildir.',
       'pro.f1': 'Öğrenci planındaki her şey',
+      'pro.f2': 'Kayıtlı senaryolar (örnek)',
+      'pro.f3': 'PDF ve tablo dışa aktarımı (örnek)',
 
       'footer.note': 'IE Toolkit. Endüstri mühendisleri için geliştirildi.',
 
@@ -949,6 +955,19 @@
     return n.toLocaleString(localeOf(lang).tag, { minimumFractionDigits: digits, maximumFractionDigits: digits });
   }
 
+  // Counts and quantities in the calculators: whole numbers are shown exactly
+  // (1,234,567, never rounded to significant digits or written in scientific
+  // notation); fractions keep up to 3 decimals, or 6 below one.
+  function formatQuantity(n, lang) {
+    if (!Number.isFinite(n)) return EMPTY_RESULT;
+    const clean = Number(n.toFixed(9)); // drop float residue
+    if (clean === 0) return '0';
+    const text = Math.abs(clean).toLocaleString(localeOf(lang).tag, {
+      maximumFractionDigits: Math.abs(clean) >= 1 ? 3 : 6,
+    });
+    return (clean < 0 ? '−' : '') + text;
+  }
+
   /* --- Inventory (EOQ, safety stock, reorder point, annual cost) --- */
 
   // Cycle service level -> z-score of the standard normal distribution.
@@ -1001,9 +1020,10 @@
   // Next whole unit up, ignoring float residue (50.0000000001 stays 50).
   const roundUpUnits = (n) => Math.ceil(n - 1e-9);
 
-  // Parses and checks one typed input against its rule.
+  // Parses and checks one typed input against its rule ({ positive, integer, optional }).
+  // Shared by the inventory and capacity modules.
   // Returns { value } (undefined for a blank optional field) or { error: messageKey }.
-  function parseInventoryField(raw, rule, lang) {
+  function parseRuleField(raw, rule, lang) {
     const parsed = parseInput(raw === undefined ? '' : raw, lang);
     if (parsed.status === 'empty') return rule.optional ? {} : { error: 'error.required' };
     if (parsed.status === 'invalid') return { error: 'error.invalid' };
@@ -1017,7 +1037,8 @@
   // Full pipeline for the inventory module.
   // rawInputs: the typed fields of INVENTORY_FIELDS, plus serviceLevel (an id from
   //   SERVICE_LEVELS) and manualSafetyStock (true = use the typed safetyStock).
-  // Returns { fieldErrors, values, ordering, replenishment }. `ordering` and
+  // Returns { fieldErrors, values, ordering, replenishment, impliedOperatingDays,
+  // operatingDaysWarning }. `ordering` and
   // `replenishment` are null when any input of that group is invalid, so no
   // result is ever built on bad input; the two groups do not block each other.
   function evaluateInventory(rawInputs, lang) {
@@ -1029,7 +1050,7 @@
     Object.keys(INVENTORY_FIELDS).forEach((field) => {
       const rule = INVENTORY_FIELDS[field];
       if (rule.mode && rule.mode !== (manual ? 'manual' : 'calculated')) return;
-      const outcome = parseInventoryField(rawInputs[field], rule, lang);
+      const outcome = parseRuleField(rawInputs[field], rule, lang);
       if (outcome.error) {
         fieldErrors[field] = outcome.error;
         groupValid[rule.group] = false;
@@ -1094,7 +1115,14 @@
       }
     }
 
-    return { fieldErrors, values, ordering, replenishment };
+    // Annual and daily demand are entered separately; together they imply how many
+    // days a year the item is in demand. More than a calendar year cannot be right.
+    const impliedOperatingDays = values.annualDemand !== undefined && values.dailyDemand !== undefined
+      ? values.annualDemand / values.dailyDemand
+      : null;
+    const operatingDaysWarning = impliedOperatingDays !== null && impliedOperatingDays > DAYS_PER_YEAR * (1 + 1e-9);
+
+    return { fieldErrors, values, ordering, replenishment, impliedOperatingDays, operatingDaysWarning };
   }
 
   /* --- Capacity planning and bottleneck analysis --- */
@@ -1126,7 +1154,7 @@
     const values = {};
     const fieldErrors = {};
     Object.keys(CAPACITY_FIELDS).forEach((field) => {
-      const outcome = parseInventoryField(rawInputs[field], CAPACITY_FIELDS[field], lang);
+      const outcome = parseRuleField(rawInputs[field], CAPACITY_FIELDS[field], lang);
       if (outcome.error) fieldErrors[field] = outcome.error;
       else values[field] = outcome.value;
     });
@@ -1142,7 +1170,8 @@
       result: {
         utilization: metrics.utilization,
         efficiency: metrics.efficiency,
-        unusedCapacity: values.designCapacity - values.actualOutput,
+        unusedCapacity: Math.max(0, values.designCapacity - values.actualOutput),
+        overDesignBy: Math.max(0, values.actualOutput - values.designCapacity),
         plannedAllowance: values.designCapacity - values.effectiveCapacity,
       },
       overEffective: values.actualOutput > values.effectiveCapacity,
@@ -1183,7 +1212,7 @@
       const station = { name: String(rawStation.name === undefined ? '' : rawStation.name).trim() };
       if (station.name === '') errors.name = 'cap.error.name';
       Object.keys(STATION_FIELDS).forEach((field) => {
-        const outcome = parseInventoryField(rawStation[field], STATION_FIELDS[field], lang);
+        const outcome = parseRuleField(rawStation[field], STATION_FIELDS[field], lang);
         if (outcome.error) errors[field] = outcome.error;
         else station[field] = outcome.value;
       });
@@ -1225,7 +1254,7 @@
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
       CATEGORIES, I18N, translate, convert, normalizeInput, parseInput, localizeInput, formatNumber, toPlainString, evaluate,
-      calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent, formatFixed,
+      calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent, formatFixed, formatQuantity,
       SERVICE_LEVELS, calculateEoq, calculateInventoryCost, calculateSafetyStock, calculateReorderPoint, evaluateInventory,
       MAX_STATIONS, calculateCapacityMetrics, evaluateCapacity, calculateStationCapacity, analyzeLine, evaluateStations,
     };
@@ -1251,6 +1280,28 @@
     } catch (error) {
       /* preference simply is not remembered */
     }
+  }
+
+  // Screen-reader announcements for a calculator: one short status line (the
+  // element with `id`) instead of a live region around the whole result panel.
+  // Nothing is spoken until the user first interacts with `form`, and updates
+  // wait for a pause in typing.
+  function createAnnouncer(id, form) {
+    const element = document.getElementById(id);
+    let armed = false;
+    let timer = null;
+    ['input', 'change', 'click'].forEach((type) => {
+      form.addEventListener(type, () => {
+        armed = true;
+      }, true);
+    });
+    return (text) => {
+      if (!armed || !element) return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        element.textContent = text;
+      }, 700);
+    };
   }
 
   // Current language, and the callbacks to run when it changes. Each callback
@@ -1462,6 +1513,7 @@
     const analysisText = byId('oee-analysis-text');
     const warningEl = byId('oee-warning');
     const disclaimerEl = byId('oee-disclaimer');
+    const announce = createAnnouncer('oee-live', form);
 
     // The bar is only a picture of the number beside it: it stops at full
     // width, and is-over marks a value above 100% (the number is never capped).
@@ -1494,7 +1546,7 @@
       });
       const outcome = evaluateOee(raw, lang);
       const isOk = outcome.status === 'ok';
-      const number = (n) => formatNumber(n, lang);
+      const number = (n) => formatQuantity(n, lang);
 
       showFieldErrors(isOk ? {} : outcome.fieldErrors);
       warningEl.hidden = !(isOk && outcome.performanceOver100);
@@ -1509,6 +1561,7 @@
         OEE_COMPONENTS.forEach((name) => showComponent(name, NaN, '', false));
         analysisTitle.textContent = t('oee.invalid.title');
         analysisText.textContent = t('oee.invalid.text');
+        announce(t('oee.invalid.title') + '. ' + t('oee.invalid.text'));
         return;
       }
 
@@ -1534,6 +1587,8 @@
         value: formatPercent(result[lowest], lang),
       });
       analysisText.textContent = t('oee.suggest.' + lowest);
+      announce('OEE ' + formatPercent(result.oee, lang) + '. '
+        + OEE_COMPONENTS.map((name) => t('oee.' + name) + ' ' + formatPercent(result[name], lang)).join(', ') + '.');
     }
 
     OEE_FIELDS.forEach((field) => inputs[field].addEventListener('input', update));
@@ -1568,6 +1623,7 @@
     const fields = Object.keys(inputs);
     const manualToggle = byId('inv-manual');
     const serviceSelect = byId('inv-service');
+    const announce = createAnnouncer('inv-live', form);
     const setText = (id, text) => {
       byId(id).textContent = text;
     };
@@ -1597,8 +1653,9 @@
       fields.forEach((field) => {
         raw[field] = inputs[field].value;
       });
-      const { fieldErrors, values, ordering, replenishment } = evaluateInventory(raw, lang);
-      const number = (n) => formatNumber(n, lang);
+      const outcome = evaluateInventory(raw, lang);
+      const { fieldErrors, ordering, replenishment } = outcome;
+      const number = (n) => formatQuantity(n, lang);
       const money = (n) => formatFixed(n, lang, 2);
 
       fields.forEach((field) => {
@@ -1653,9 +1710,23 @@
         setText('inv-rop-detail', '');
       }
 
-      // Uses one input from each group, so it needs both to be present.
-      const hasBothDemands = values.annualDemand !== undefined && values.dailyDemand !== undefined;
-      setText('inv-implied-days', hasBothDemands ? number(values.annualDemand / values.dailyDemand) : EMPTY_RESULT);
+      // Uses one input from each group, so it is worked out for the module as a whole.
+      setText('inv-implied-days', outcome.impliedOperatingDays === null ? EMPTY_RESULT : number(outcome.impliedOperatingDays));
+      byId('inv-warning-days').hidden = !outcome.operatingDaysWarning;
+      setText('inv-warning-days', outcome.operatingDaysWarning
+        ? t('inv.warning.days', { days: number(outcome.impliedOperatingDays) })
+        : '');
+
+      const unitWord = t('oee.unit.units');
+      announce([
+        ordering
+          ? 'EOQ ' + number(ordering.eoqRounded) + ' ' + unitWord + '. ' + t('inv.cost.title') + ' ' + money(ordering.cost.total) + '.'
+          : t('inv.invalid.ordering'),
+        replenishment
+          ? t('inv.ss.title') + ' ' + number(replenishment.safetyStock) + ' ' + unitWord + '. '
+            + t('inv.rop.title') + ' ' + number(replenishment.reorderPoint) + ' ' + unitWord + '.'
+          : t('inv.invalid.replenishment'),
+      ].join(' '));
     }
 
     fields.forEach((field) => inputs[field].addEventListener('input', update));
@@ -1689,7 +1760,7 @@
     const setText = (id, text) => {
       byId(id).textContent = text;
     };
-    const number = (n) => formatNumber(n, lang);
+    const number = (n) => formatQuantity(n, lang);
     const create = (tag, className, text) => {
       const element = document.createElement(tag);
       if (className) element.className = className;
@@ -1707,6 +1778,12 @@
     const periodSelect = byId('cap-period');
     const utilBar = byId('cap-util-bar');
     const effBar = byId('cap-eff-bar');
+
+    // One spoken summary for the whole module, built from its two halves.
+    const announce = createAnnouncer('cap-live', form);
+    let capacitySummary = '';
+    let lineSummary = '';
+    const announceResults = () => announce((capacitySummary + ' ' + lineSummary).trim());
 
     function setMeter(meter, ratio) {
       const shown = Number.isFinite(ratio) ? Math.min(Math.max(ratio, 0), 1) : 0;
@@ -1746,6 +1823,14 @@
       byId('cap-capacity-status').hidden = isOk;
       byId('cap-warning-effective').hidden = !(isOk && outcome.overEffective);
       byId('cap-warning-design').hidden = !(isOk && outcome.overDesign);
+      setText('cap-warning-design', isOk && outcome.overDesign
+        ? t('cap.warning.design', { value: number(outcome.result.overDesignBy), unit })
+        : '');
+      capacitySummary = isOk
+        ? t('cap.util.title') + ' ' + formatPercent(outcome.result.utilization, lang) + '. '
+          + t('cap.eff.title') + ' ' + formatPercent(outcome.result.efficiency, lang) + '.'
+        : t('cap.invalid.capacity');
+      announceResults();
 
       if (!isOk) {
         ['cap-util-value', 'cap-eff-value', 'cap-sum-design', 'cap-sum-effective', 'cap-sum-actual',
@@ -1803,7 +1888,6 @@
       input.value = options.value;
       input.setAttribute('aria-describedby', id + '-error');
       input.setAttribute('aria-invalid', 'false');
-      input.addEventListener('input', updateStations);
       box.appendChild(input);
       let unit = null;
       if (options.unitKey) {
@@ -1815,10 +1899,22 @@
       field.appendChild(label);
       field.appendChild(box);
       field.appendChild(error);
-      return { field, label, labelKey, input, unit, unitKey: options.unitKey, error };
+
+      // `touched` holds back a field's error until the user has typed in it, or
+      // has moved on from its row (see addStation), so a freshly added,
+      // still-empty row is not shown as a mistake.
+      const part = { field, label, labelKey, input, unit, unitKey: options.unitKey, error, touched: options.touched };
+      input.addEventListener('input', () => {
+        part.touched = true;
+        updateStations();
+      });
+      return part;
     }
 
-    function addStation(values, focus) {
+    // `isNew` rows (added by the user) start untouched; the default rows do not.
+    function addStation(values, isNew) {
+      const touched = !isNew;
+      const focus = isNew;
       const rowId = nextRowId;
       nextRowId += 1;
       const element = create('li', 'station');
@@ -1833,11 +1929,13 @@
         element,
         tag,
         removeButton,
-        name: buildField(rowId, 'name', 'cap.station.name', { value: values.name }),
+        name: buildField(rowId, 'name', 'cap.station.name', { value: values.name, touched }),
         processingTime: buildField(rowId, 'time', 'cap.station.time', {
-          value: values.processingTime, inputmode: 'decimal', unitKey: 'oee.unit.minPerUnit',
+          value: values.processingTime, inputmode: 'decimal', unitKey: 'oee.unit.minPerUnit', touched,
         }),
-        machines: buildField(rowId, 'machines', 'cap.station.machines', { value: values.machines, inputmode: 'numeric' }),
+        machines: buildField(rowId, 'machines', 'cap.station.machines', {
+          value: values.machines, inputmode: 'numeric', touched,
+        }),
       };
       const pair = create('div', 'station-pair');
       pair.appendChild(row.processingTime.field);
@@ -1847,6 +1945,15 @@
       element.appendChild(pair);
 
       removeButton.addEventListener('click', () => removeStation(row));
+      // Moving on to another control outside this row means the user is done
+      // with it for now, so whatever is still missing is then shown.
+      element.addEventListener('focusout', (event) => {
+        if (!event.relatedTarget || element.contains(event.relatedTarget) || !rows.includes(row)) return;
+        ['name', 'processingTime', 'machines'].forEach((key) => {
+          row[key].touched = true;
+        });
+        updateStations();
+      });
       rows.push(row);
       stationList.appendChild(element);
       labelRows();
@@ -1935,16 +2042,28 @@
       })), lang);
       const isOk = outcome.status === 'ok';
 
+      let hasShownError = false;
+      const pendingRows = []; // rows that are only unfinished: problems in fields not yet touched
       rows.forEach((row, index) => {
+        let isPending = false;
         ['name', 'processingTime', 'machines'].forEach((key) => {
           const messageKey = outcome.rowErrors[index] && outcome.rowErrors[index][key];
-          row[key].input.setAttribute('aria-invalid', String(Boolean(messageKey)));
-          row[key].error.textContent = messageKey ? t(messageKey) : '';
+          const show = Boolean(messageKey) && row[key].touched;
+          if (show) hasShownError = true;
+          else if (messageKey) isPending = true;
+          row[key].input.setAttribute('aria-invalid', String(show));
+          row[key].error.textContent = show ? t(messageKey) : '';
         });
+        if (isPending) pendingRows.push(stationTag(index));
       });
       labelRows(); // remove-button labels follow the typed names
 
-      byId('cap-stations-status').hidden = isOk;
+      // Results are paused either way; the wording is an error only if the user
+      // has actually entered something wrong.
+      const showPending = !isOk && !hasShownError && pendingRows.length > 0;
+      byId('cap-stations-status').hidden = isOk || showPending;
+      byId('cap-stations-pending').hidden = !showPending;
+      setText('cap-stations-pending', showPending ? t('cap.pending', { stations: listNames(pendingRows) }) : '');
       barList.parentElement.hidden = !isOk;
       insightList.parentElement.hidden = !isOk;
       byId('cap-tied-tag').hidden = !(isOk && outcome.bottleneckIndexes.length > 1);
@@ -1955,11 +2074,16 @@
         setText('cap-throughput-detail', '');
         barList.textContent = '';
         insightList.textContent = '';
+        lineSummary = showPending ? byId('cap-stations-pending').textContent : t('cap.invalid.stations');
+        announceResults();
         return;
       }
 
       const unit = t('cap.unit.perHour');
       const bottleneckNames = outcome.bottleneckIndexes.map((index) => outcome.stations[index].name);
+      lineSummary = t('cap.bottleneck.title') + ': ' + listNames(bottleneckNames) + '. '
+        + t('cap.throughput.title') + ': ' + number(outcome.throughput) + ' ' + unit + '.';
+      announceResults();
       setText('cap-bottleneck-value', listNames(bottleneckNames));
       setText('cap-bottleneck-detail', bottleneckNames.length > 1
         ? t('cap.bottleneck.detailTied', { count: bottleneckNames.length, value: number(outcome.throughput), unit })
@@ -2038,6 +2162,9 @@
     });
     applyTranslations();
     markActive();
+    // index.html hides the page while a saved non-English language is still to
+    // be applied, so English never flashes first. The text is now in place.
+    document.documentElement.classList.remove('i18n-pending');
   }
 
   // The inline script in index.html sets data-theme before first paint;
@@ -2102,7 +2229,9 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12 }
+      // Any part entering the viewport is enough: a share-of-element threshold can
+      // never be met by a block much taller than a short screen.
+      { threshold: 0, rootMargin: '0px 0px -8% 0px' }
     );
     items.forEach((item) => observer.observe(item));
   }

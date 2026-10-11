@@ -192,6 +192,12 @@ select {
   display: none !important;
 }
 
+/* Set by the inline script in index.html while a saved non-English language is
+   waiting to be applied; removed by app.js as soon as the text is translated. */
+.i18n-pending body {
+  visibility: hidden;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -1448,6 +1454,16 @@ output.field-value {
   color: var(--danger);
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+/* Neutral note: something is unfinished, nothing is wrong */
+.calc-pending {
+  padding: 8px 12px;
+  border-left: 2px solid var(--border-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-soft);
+  color: var(--text);
+  font-size: 0.9rem;
 }
 
 .metric-grid-2 {

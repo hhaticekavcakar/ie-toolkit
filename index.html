@@ -6,7 +6,8 @@
   <title data-i18n="meta.title">IE Toolkit — Industrial Engineering Workspace</title>
   <meta name="description" data-i18n-attr="content:meta.description" content="IE Toolkit is an engineering workspace for industrial engineering students and professionals, starting with the ConvertLab unit converter.">
 
-  <!-- Runs before first paint so the saved (or system) theme never flashes in late. -->
+  <!-- Runs before first paint so the saved (or system) theme never flashes in
+       late, and a saved Turkish preference never shows English first. -->
   <script>
     (function () {
       var theme, lang;
@@ -18,10 +19,18 @@
         theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
       document.documentElement.setAttribute('data-theme', theme);
-      if (lang === 'tr') document.documentElement.lang = 'tr';
+      if (lang === 'tr') {
+        // The page text is written in English and translated by app.js. Keep it
+        // hidden until then (see .i18n-pending in style.css). The timer is a
+        // safety net so the page still appears if app.js cannot run.
+        document.documentElement.lang = 'tr';
+        document.documentElement.classList.add('i18n-pending');
+        setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 2000);
+      }
     })();
   </script>
 
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%234f46e5'/%3E%3Cpath d='M11 27 20 12l9 10-18 5 17 3-1-8' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' opacity='.8'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='11' cy='27' r='3.2'/%3E%3Ccircle cx='20' cy='12' r='3.2'/%3E%3Ccircle cx='29' cy='22' r='3.2'/%3E%3Ccircle cx='28' cy='30' r='2.4'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -439,7 +448,8 @@
             </div>
           </form>
 
-          <div class="oee-results" aria-live="polite">
+          <div class="oee-results">
+            <p class="visually-hidden" id="oee-live" role="status"></p>
             <div class="oee-headline">
               <p class="tech-label" data-i18n="oee.overall">Overall equipment effectiveness</p>
               <p class="oee-figure"><output id="oee-value" for="oee-planned oee-downtime oee-cycle oee-units oee-defects">—</output> <span class="oee-figure-name">OEE</span></p>
@@ -606,7 +616,8 @@
             </fieldset>
           </form>
 
-          <div class="calc-results" aria-live="polite">
+          <div class="calc-results">
+            <p class="visually-hidden" id="inv-live" role="status"></p>
             <p class="calc-status" id="inv-ordering-status" data-i18n="inv.invalid.ordering" hidden>Correct the highlighted ordering inputs to see EOQ and cost results.</p>
             <p class="calc-status" id="inv-replenishment-status" data-i18n="inv.invalid.replenishment" hidden>Correct the highlighted replenishment inputs to see safety stock and reorder point.</p>
 
@@ -647,6 +658,7 @@
               </article>
             </div>
 
+            <p class="calc-warning" id="inv-warning-days" hidden></p>
             <p class="calc-warning" id="inv-warning" data-i18n="inv.warning.variability" hidden>The standard deviation is larger than average daily demand. A normal distribution fits such demand poorly, so treat this safety stock with caution.</p>
 
             <div>
@@ -748,7 +760,8 @@
             </fieldset>
           </form>
 
-          <div class="calc-results" aria-live="polite">
+          <div class="calc-results">
+            <p class="visually-hidden" id="cap-live" role="status"></p>
             <p class="calc-status" id="cap-capacity-status" data-i18n="cap.invalid.capacity" hidden>Correct the highlighted capacity inputs to see utilization and efficiency.</p>
 
             <div class="metric-grid metric-grid-2">
@@ -772,7 +785,7 @@
             </div>
 
             <p class="calc-warning" id="cap-warning-effective" data-i18n="cap.warning.effective" hidden>Actual output is above effective capacity, so efficiency exceeds 100%. The effective capacity or the output figure may be inconsistent; check that both cover the same period. The value is shown as calculated, not capped.</p>
-            <p class="calc-warning" id="cap-warning-design" data-i18n="cap.warning.design" hidden>Actual output is above design capacity, so utilization exceeds 100%. Design capacity is the maximum possible output, so the inputs are inconsistent. The value is shown as calculated, not capped.</p>
+            <p class="calc-warning" id="cap-warning-design" hidden></p>
 
             <div>
               <p class="tech-label" data-i18n="cap.summary">Capacity summary</p>
@@ -786,6 +799,7 @@
             </div>
 
             <p class="calc-status" id="cap-stations-status" data-i18n="cap.invalid.stations" hidden>Correct the highlighted station inputs to see the bottleneck analysis.</p>
+            <p class="calc-pending" id="cap-stations-pending" hidden></p>
 
             <div class="metric-grid metric-grid-2">
               <article class="metric">
@@ -801,7 +815,7 @@
                 <div class="metric-head">
                   <h3 data-i18n="cap.throughput.title">Maximum theoretical line throughput</h3>
                 </div>
-                <p class="metric-value"><span id="cap-throughput-value">—</span> <span class="metric-unit" data-i18n="cap.unit.perHour">units/h</span></p>
+                <p class="metric-value"><span id="cap-throughput-value">—</span> <span class="metric-unit" data-i18n="cap.unit.perHour">units/hour</span></p>
                 <p class="metric-detail" id="cap-throughput-detail"></p>
               </article>
             </div>
@@ -851,8 +865,8 @@
             </div>
             <p class="price-desc" data-i18n="student.desc">For coursework and labs.</p>
             <ul class="feature-list">
-              <li data-i18n="student.f1">ConvertLab unit converter</li>
-              <li data-i18n="student.f2">All five conversion categories</li>
+              <li data-i18n="student.f1">All four tools</li>
+              <li data-i18n="student.f2">English and Turkish, light and dark themes</li>
               <li data-i18n="student.f3">Works in any modern browser</li>
             </ul>
             <button class="btn btn-secondary btn-block" type="button" disabled data-i18n="plan.button">Demo plan</button>
@@ -863,12 +877,11 @@
               <h3 data-i18n="plan.pro">Pro</h3>
               <p class="price"><span class="price-amount">$4</span><span class="price-period" data-i18n="plan.period">/month</span></p>
             </div>
-            <p class="price-desc" data-i18n="pro.desc">Every module as it ships.</p>
+            <p class="price-desc" data-i18n="pro.desc">Example of a paid tier. These extras do not exist.</p>
             <ul class="feature-list">
               <li data-i18n="pro.f1">Everything in Student</li>
-              <li data-i18n="tool2.title">Production Efficiency &amp; OEE</li>
-              <li data-i18n="tool3.title">Inventory Management</li>
-              <li data-i18n="tool4.title">Capacity Planning</li>
+              <li data-i18n="pro.f2">Saved scenarios (example)</li>
+              <li data-i18n="pro.f3">Export to PDF and spreadsheet (example)</li>
             </ul>
             <button class="btn btn-primary btn-block" type="button" disabled data-i18n="plan.button">Demo plan</button>
           </article>
@@ -895,6 +908,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js" onerror="document.documentElement.classList.remove('i18n-pending')"></script>
 </body>
 </html>
