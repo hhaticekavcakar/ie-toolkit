@@ -1,5 +1,7 @@
 # IE Toolkit
 
+**Live site: https://hhaticekavcakar.github.io/ie-toolkit/**
+
 IE Toolkit is a small web workspace of calculators for industrial engineering students and professionals. It runs entirely in the browser: there is no server, no account and no installation.
 
 The interface is available in English and Turkish, with light and dark themes.
@@ -97,6 +99,7 @@ These calculators are simplified textbook models intended for learning and quick
 index.html   Page structure, text (in English) and SVG illustrations
 style.css    All styling; every colour is a CSS variable, with a light and a dark set
 app.js       Unit data, translations, calculation functions and page behaviour
+og-image.png Preview image shown when the site link is shared
 ```
 
 Inside `app.js` the calculation functions are kept separate from the code that updates the page, and are exported when the file is loaded in Node so they can be tested without a browser.
@@ -119,4 +122,4 @@ The site was developed and checked in Microsoft Edge (Chromium). It has not been
 
 ## Status
 
-The site is not yet published. It is a static site with relative file paths, so it can be hosted on GitHub Pages or any static host without changes.
+The site is published with GitHub Pages at https://hhaticekavcakar.github.io/ie-toolkit/, served from the `main` branch of this repository. It is a static site with relative file paths, so it can also be hosted on any other static host without changes.
