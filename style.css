@@ -14,6 +14,8 @@
    Every colour in this file comes from these variables.
    -------------------------------------------------------------------------- */
 :root {
+  color-scheme: light;
+
   /* Surfaces */
   --bg: #f8fafc;
   --bg-tint: #eaf2ff;
@@ -65,35 +67,44 @@
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Mission 1 — dark theme draft. Not active: enable by moving these values
-   under a selector such as :root[data-theme="dark"] and testing contrast.
+/* Dark theme: deep navy surfaces, ice-blue accents. Only tokens change here;
+   the attribute is set by the inline script in index.html and by app.js. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-  --bg: #0b1228;
-  --bg-tint: #101a3a;
-  --surface: #131d40;
-  --surface-soft: #0f1834;
-  --border: #26335c;
-  --border-strong: #3a4a7c;
-  --nav-bg: rgba(11, 18, 40, 0.9);
+  --bg: #0b1226;
+  --bg-tint: #0f1936;
+  --surface: #141f42;
+  --surface-soft: #101a39;
+  --border: #26345a;
+  --border-strong: #3d4e80;
+  --nav-bg: rgba(11, 18, 38, 0.9);
+
   --ink: #eaf2ff;
   --text: #cbd5e1;
-  --text-muted: #9fb0cc;
-  --text-on-accent: #0b1228;
-  --accent: #a5b4fc;
-  --accent-hover: #c7d2fe;
-  --accent-soft: #1c2752;
-  --focus-ring: rgba(165, 180, 252, 0.4);
-  --danger: #fca5a5;
-  --grid-line: rgba(234, 242, 255, 0.05);
-  --tick: rgba(234, 242, 255, 0.18);
-  --tick-strong: rgba(234, 242, 255, 0.36);
-  --ill-line: #eaf2ff;
-  --ill-line-soft: #5b6c99;
-  --ill-fill: #131d40;
-  --ill-accent: #a5b4fc;
-  --ill-accent-soft: #2f3b78;
+  --text-muted: #a3b3cf;
+  --text-on-accent: #0b1226;
+
+  --accent: #a9c4ff;
+  --accent-hover: #c8daff;
+  --accent-soft: #1b2a57;
+  --focus-ring: rgba(169, 196, 255, 0.45);
+  --danger: #ffa4a4;
+
+  --grid-line: rgba(234, 242, 255, 0.045);
+  --tick: rgba(234, 242, 255, 0.2);
+  --tick-strong: rgba(234, 242, 255, 0.4);
+
+  --ill-line: #dbe7ff;
+  --ill-line-soft: #5d6f9e;
+  --ill-fill: #141f42;
+  --ill-accent: #a9c4ff;
+  --ill-accent-soft: #2c3d7a;
   --ill-note: #9fb0cc;
-*/
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.28);
+}
 
 /* --------------------------------------------------------------------------
    2. Base
@@ -356,11 +367,12 @@ a.text-link:hover {
   opacity: 0.8;
 }
 
+/* On desktop .nav-menu dissolves (display: contents) so its links and button
+   line up with the controls as one row, in the same order as the markup. */
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 2px;
   min-height: 58px;
 }
 
@@ -368,6 +380,7 @@ a.text-link:hover {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-right: auto;
   border-radius: var(--radius-sm);
   color: var(--ink);
 }
@@ -386,9 +399,7 @@ a.text-link:hover {
 }
 
 .nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 2px;
+  display: contents;
 }
 
 .nav-menu a:not(.btn) {
@@ -405,11 +416,120 @@ a.text-link:hover {
 }
 
 .nav-menu .btn {
-  margin-left: 10px;
+  margin-left: 12px;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 12px;
+}
+
+/* Language selector: two-segment control */
+.lang-switch {
+  display: flex;
+  flex: none;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-tint);
+}
+
+.lang-btn {
+  position: relative;
+  min-width: 32px;
+  padding: 0 7px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Taller hit area for touch without changing the visual size */
+.lang-btn::before {
+  content: "";
+  position: absolute;
+  inset: -9px 0;
+}
+
+.lang-btn:hover {
+  color: var(--ink);
+}
+
+.lang-btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+
+/* Theme switch: the thumb slides under the sun (light) or the moon (dark) */
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  width: 56px;
+  height: 30px;
+  padding: 0 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 15px;
+  background: var(--bg-tint);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-switch:hover {
+  border-color: var(--accent);
+}
+
+/* Larger hit area for touch without changing the visual size */
+.theme-switch::before {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+
+.theme-icon {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  transition: color 0.2s ease;
+}
+
+.theme-switch[aria-checked="false"] .theme-icon:first-of-type,
+.theme-switch[aria-checked="true"] .theme-icon:last-of-type {
+  color: var(--accent);
+}
+
+.theme-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-switch[aria-checked="true"] .theme-thumb {
+  transform: translateX(26px);
 }
 
 .nav-toggle {
   display: none;
+  margin-left: 10px;
   width: 44px;
   height: 44px;
   padding: 10px;
@@ -1249,6 +1369,14 @@ output.field-value {
     --gutter: 20px;
   }
 
+  .pricing-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Collapsed navigation: links move into the menu; the theme and language
+   controls stay in the bar beside the menu button. */
+@media (max-width: 900px) {
   .nav-toggle {
     display: block;
   }
@@ -1281,8 +1409,14 @@ output.field-value {
     margin: 8px 0 0;
   }
 
-  .pricing-grid {
-    grid-template-columns: minmax(0, 1fr);
+  .nav-controls {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-name {
+    display: none;
   }
 }
 
