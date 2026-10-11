@@ -2,10 +2,11 @@
    IE Toolkit — app.js
    1. Conversion data      (edit here to add units or categories)
    2. Translations         (one dictionary for every user-facing string)
-   3. Pure functions       (unit conversion, number parsing/formatting, OEE)
+   3. Pure functions       (unit conversion, number parsing/formatting, OEE, inventory)
    4. ConvertLab UI        (full converter + hero preview)
    5. OEE calculator UI
-   6. Site UI              (language, theme, mobile nav, scroll reveal, footer year)
+   6. Inventory calculator UI
+   7. Site UI             (language, theme, mobile nav, scroll reveal, footer year)
    ========================================================================== */
 (function () {
   'use strict';
@@ -121,6 +122,7 @@
       'a11y.language': 'Language',
 
       'nav.modules': 'Modules',
+      'nav.inventory': 'Inventory',
       'nav.pricing': 'Pricing',
       'nav.open': 'Open ConvertLab',
 
@@ -145,7 +147,7 @@
 
       'modules.label': 'Sec. 01 — Tool directory',
       'modules.title': 'Modules',
-      'modules.intro': 'Two tools are available today. Two more are in development on the same foundation.',
+      'modules.intro': 'Three tools are available today. One more is in development on the same foundation.',
       'tool.word': 'Tool',
       'tool.open': 'Open tool',
       'tool1.desc': 'Unit converter for length, mass, pressure, energy and temperature.',
@@ -211,7 +213,68 @@
       'oee.error.noOperatingTime': 'Downtime equals planned time, leaving no operating time',
       'oee.error.defectsOver': 'Defective units cannot exceed total units produced',
 
-      'pricing.label': 'Sec. 04 — Plans',
+      'inv.label': 'Sec. 04 — Tool 03',
+      'inv.intro': 'Work out how much to order, when to reorder and what it costs per year for one stocked item.',
+      'inv.inputs': 'Inventory inputs',
+      'inv.group.ordering': 'Ordering',
+      'inv.group.replenishment': 'Replenishment',
+      'inv.demand': 'Annual demand (D)',
+      'inv.orderCost': 'Ordering cost (S)',
+      'inv.holdingCost': 'Annual holding cost (H)',
+      'inv.quantity': 'Order quantity (Q), optional',
+      'inv.quantity.hint': 'Leave blank to use the EOQ.',
+      'inv.daily': 'Average daily demand (d)',
+      'inv.lead': 'Lead time (L)',
+      'inv.manual': 'Enter safety stock manually',
+      'inv.sigma': 'Daily demand standard deviation (σd)',
+      'inv.service': 'Target service level',
+      'inv.service.option': '{level} (z = {z})',
+      'inv.safety': 'Safety stock (SS)',
+      'inv.unit.unitsYear': 'units/yr',
+      'inv.unit.perOrder': 'per order',
+      'inv.unit.perUnitYear': 'per unit/yr',
+      'inv.unit.unitsDay': 'units/day',
+      'inv.unit.days': 'days',
+      'inv.eoq.title': 'Economic order quantity',
+      'inv.eoq.exact': 'Exact EOQ: {value} units, rounded to the nearest whole unit.',
+      'inv.ss.title': 'Safety stock',
+      'inv.ss.calc': 'Exact: {value} units (z = {z}), rounded up.',
+      'inv.ss.manual': 'Entered manually.',
+      'inv.rop.title': 'Reorder point',
+      'inv.rop.detail': '{demand} lead-time demand + {ss} safety stock, rounded up.',
+      'inv.cost.title': 'Total relevant annual cost',
+      'inv.cost.atEoq': 'At the EOQ, where ordering and holding costs are equal.',
+      'inv.cost.atQ': 'At your order quantity of {q} units.',
+      'inv.costs': 'Cost breakdown',
+      'inv.fact.ordering': 'Annual ordering cost',
+      'inv.fact.holding': 'Annual holding cost',
+      'inv.fact.optimal': 'Cost at EOQ',
+      'inv.fact.penalty': 'Extra cost vs EOQ',
+      'inv.costNote': 'Purchase cost of the items is excluded: it does not change with the order quantity. Costs are in the currency you entered.',
+      'inv.supporting': 'Supporting calculations',
+      'inv.fact.orders': 'Orders per year',
+      'inv.fact.interval': 'Days between orders (365-day year)',
+      'inv.fact.cycleStock': 'Average cycle stock (Q/2)',
+      'inv.fact.leadDemand': 'Demand during lead time (d × L)',
+      'inv.fact.z': 'z-score',
+      'inv.fact.days': 'Operating days implied (D ÷ d)',
+      'inv.notes': 'Rounding and assumptions',
+      'inv.rounding.title': 'Rounding',
+      'inv.rounding.text': 'Safety stock and reorder point are rounded up to whole units: rounding down would give less protection than the chosen service level. EOQ is rounded to the nearest whole unit; total cost changes very little near the optimum, so a convenient pack size close to the EOQ is fine.',
+      'inv.assumptions.title': 'Assumptions',
+      'inv.assume.1': 'Daily demand is roughly normally distributed and independent from day to day.',
+      'inv.assume.2': 'Lead time is constant; only demand varies.',
+      'inv.assume.3': 'Service level is the probability of not running out during one replenishment cycle, not the share of demand filled.',
+      'inv.assume.4': 'EOQ assumes steady demand, fixed ordering and holding costs, and no quantity discounts.',
+      'inv.warning.variability': 'The standard deviation is larger than average daily demand. A normal distribution fits such demand poorly, so treat this safety stock with caution.',
+      'inv.invalid.ordering': 'Correct the highlighted ordering inputs to see EOQ and cost results.',
+      'inv.invalid.replenishment': 'Correct the highlighted replenishment inputs to see safety stock and reorder point.',
+      'error.required': 'Enter a value',
+      'error.negative': 'Must not be negative',
+      'error.positive': 'Must be greater than 0',
+      'error.wholeNumber': 'Enter a whole number',
+
+      'pricing.label': 'Sec. 05 — Plans',
       'pricing.title': 'Pricing',
       'pricing.demoStrong': 'Demonstration only.',
       'pricing.demoText': 'These plans are examples. No payments or subscriptions are available.',
@@ -293,6 +356,7 @@
       'a11y.language': 'Dil',
 
       'nav.modules': 'Modüller',
+      'nav.inventory': 'Envanter',
       'nav.pricing': 'Fiyatlandırma',
       'nav.open': 'ConvertLab’i Aç',
 
@@ -317,7 +381,7 @@
 
       'modules.label': 'Böl. 01 — Araç dizini',
       'modules.title': 'Modüller',
-      'modules.intro': 'Bugün iki araç kullanıma hazır. Aynı temel üzerinde iki araç daha geliştiriliyor.',
+      'modules.intro': 'Bugün üç araç kullanıma hazır. Aynı temel üzerinde bir araç daha geliştiriliyor.',
       'tool.word': 'Araç',
       'tool.open': 'Aracı aç',
       'tool1.desc': 'Uzunluk, kütle, basınç, enerji ve sıcaklık için birim dönüştürücü.',
@@ -383,7 +447,68 @@
       'oee.error.noOperatingTime': 'Duruş süresi planlanan süreye eşit; çalışma süresi kalmıyor',
       'oee.error.defectsOver': 'Hatalı adet, üretilen toplam adedi aşamaz',
 
-      'pricing.label': 'Böl. 04 — Planlar',
+      'inv.label': 'Böl. 04 — Araç 03',
+      'inv.intro': 'Stokta tutulan bir kalem için ne kadar sipariş verileceğini, ne zaman yeniden sipariş verileceğini ve yıllık maliyeti hesaplayın.',
+      'inv.inputs': 'Envanter girdileri',
+      'inv.group.ordering': 'Sipariş',
+      'inv.group.replenishment': 'İkmal',
+      'inv.demand': 'Yıllık talep (D)',
+      'inv.orderCost': 'Sipariş maliyeti (S)',
+      'inv.holdingCost': 'Yıllık elde tutma maliyeti (H)',
+      'inv.quantity': 'Sipariş miktarı (Q), isteğe bağlı',
+      'inv.quantity.hint': 'EOQ’yu kullanmak için boş bırakın.',
+      'inv.daily': 'Ortalama günlük talep (d)',
+      'inv.lead': 'Tedarik süresi (L)',
+      'inv.manual': 'Emniyet stoğunu elle gir',
+      'inv.sigma': 'Günlük talep standart sapması (σd)',
+      'inv.service': 'Hedef hizmet düzeyi',
+      'inv.service.option': '{level} (z = {z})',
+      'inv.safety': 'Emniyet stoğu (SS)',
+      'inv.unit.unitsYear': 'adet/yıl',
+      'inv.unit.perOrder': 'sipariş başına',
+      'inv.unit.perUnitYear': 'adet/yıl başına',
+      'inv.unit.unitsDay': 'adet/gün',
+      'inv.unit.days': 'gün',
+      'inv.eoq.title': 'Ekonomik sipariş miktarı',
+      'inv.eoq.exact': 'Tam EOQ: {value} adet; en yakın tam adede yuvarlandı.',
+      'inv.ss.title': 'Emniyet stoğu',
+      'inv.ss.calc': 'Tam değer: {value} adet (z = {z}); yukarı yuvarlandı.',
+      'inv.ss.manual': 'Elle girildi.',
+      'inv.rop.title': 'Yeniden sipariş noktası',
+      'inv.rop.detail': '{demand} tedarik süresi talebi + {ss} emniyet stoğu; yukarı yuvarlandı.',
+      'inv.cost.title': 'Toplam ilgili yıllık maliyet',
+      'inv.cost.atEoq': 'EOQ’da; sipariş ve elde tutma maliyetleri eşittir.',
+      'inv.cost.atQ': 'Girdiğiniz {q} adetlik sipariş miktarında.',
+      'inv.costs': 'Maliyet dökümü',
+      'inv.fact.ordering': 'Yıllık sipariş maliyeti',
+      'inv.fact.holding': 'Yıllık elde tutma maliyeti',
+      'inv.fact.optimal': 'EOQ’daki maliyet',
+      'inv.fact.penalty': 'EOQ’ya göre ek maliyet',
+      'inv.costNote': 'Ürünlerin satın alma maliyeti hariçtir; sipariş miktarıyla değişmez. Maliyetler, girdiğiniz para birimindedir.',
+      'inv.supporting': 'Destekleyici hesaplar',
+      'inv.fact.orders': 'Yıllık sipariş sayısı',
+      'inv.fact.interval': 'Siparişler arası gün (365 günlük yıl)',
+      'inv.fact.cycleStock': 'Ortalama çevrim stoğu (Q/2)',
+      'inv.fact.leadDemand': 'Tedarik süresindeki talep (d × L)',
+      'inv.fact.z': 'z değeri',
+      'inv.fact.days': 'İma edilen çalışma günü (D ÷ d)',
+      'inv.notes': 'Yuvarlama ve varsayımlar',
+      'inv.rounding.title': 'Yuvarlama',
+      'inv.rounding.text': 'Emniyet stoğu ve yeniden sipariş noktası tam adede yukarı yuvarlanır; aşağı yuvarlamak, seçilen hizmet düzeyinden daha az koruma sağlar. EOQ en yakın tam adede yuvarlanır; optimum yakınında toplam maliyet çok az değiştiğinden, EOQ’ya yakın uygun bir paket boyutu kullanılabilir.',
+      'inv.assumptions.title': 'Varsayımlar',
+      'inv.assume.1': 'Günlük talep yaklaşık olarak normal dağılır ve günler birbirinden bağımsızdır.',
+      'inv.assume.2': 'Tedarik süresi sabittir; yalnızca talep değişir.',
+      'inv.assume.3': 'Hizmet düzeyi, bir ikmal çevriminde stoksuz kalmama olasılığıdır; karşılanan talep oranı değildir.',
+      'inv.assume.4': 'EOQ; sabit talep, sabit sipariş ve elde tutma maliyetleri ile miktar indirimi olmadığını varsayar.',
+      'inv.warning.variability': 'Standart sapma, ortalama günlük talepten büyük. Normal dağılım böyle bir talebe iyi uymaz; bu emniyet stoğunu ihtiyatla değerlendirin.',
+      'inv.invalid.ordering': 'EOQ ve maliyet sonuçlarını görmek için işaretli sipariş girdilerini düzeltin.',
+      'inv.invalid.replenishment': 'Emniyet stoğu ve yeniden sipariş noktasını görmek için işaretli ikmal girdilerini düzeltin.',
+      'error.required': 'Bir değer girin',
+      'error.negative': 'Negatif olamaz',
+      'error.positive': '0’dan büyük olmalıdır',
+      'error.wholeNumber': 'Tam sayı girin',
+
+      'pricing.label': 'Böl. 05 — Planlar',
       'pricing.title': 'Fiyatlandırma',
       'pricing.demoStrong': 'Yalnızca gösterim amaçlıdır.',
       'pricing.demoText': 'Bu planlar örnektir. Ödeme veya abonelik alınmamaktadır.',
@@ -673,11 +798,166 @@
     });
   }
 
+  // Fixed number of decimals, for money and z-scores: "3,794.73" (en), "3.794,73" (tr).
+  function formatFixed(n, lang, digits) {
+    if (!Number.isFinite(n)) return EMPTY_RESULT;
+    return n.toLocaleString(localeOf(lang).tag, { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  }
+
+  /* --- Inventory (EOQ, safety stock, reorder point, annual cost) --- */
+
+  // Cycle service level -> z-score of the standard normal distribution.
+  const SERVICE_LEVELS = [
+    { id: '90', level: 0.9, z: 1.281552 },
+    { id: '95', level: 0.95, z: 1.644854 },
+    { id: '97.5', level: 0.975, z: 1.959964 },
+    { id: '99', level: 0.99, z: 2.326348 },
+    { id: '99.9', level: 0.999, z: 3.090232 },
+  ];
+  const DEFAULT_SERVICE_LEVEL = '95';
+  const DAYS_PER_YEAR = 365;
+
+  // Rules per input. `group` decides which results an error blanks:
+  // ordering inputs drive EOQ and cost, replenishment inputs drive safety stock and reorder point.
+  const INVENTORY_FIELDS = {
+    annualDemand: { group: 'ordering', positive: true },
+    orderingCost: { group: 'ordering', positive: true },
+    holdingCost: { group: 'ordering', positive: true },
+    orderQuantity: { group: 'ordering', positive: true, integer: true, optional: true },
+    dailyDemand: { group: 'replenishment', positive: true },
+    leadTime: { group: 'replenishment' },
+    demandStdDev: { group: 'replenishment', mode: 'calculated' },
+    safetyStock: { group: 'replenishment', integer: true, mode: 'manual' },
+  };
+
+  // EOQ = sqrt(2DS / H)
+  function calculateEoq({ annualDemand, orderingCost, holdingCost }) {
+    return Math.sqrt((2 * annualDemand * orderingCost) / holdingCost);
+  }
+
+  // Relevant annual cost of ordering `orderQuantity` at a time. Purchase cost is excluded.
+  function calculateInventoryCost({ annualDemand, orderingCost, holdingCost, orderQuantity }) {
+    const ordersPerYear = annualDemand / orderQuantity;
+    const annualOrderingCost = ordersPerYear * orderingCost;
+    const annualHoldingCost = (orderQuantity / 2) * holdingCost;
+    return { ordersPerYear, orderingCost: annualOrderingCost, holdingCost: annualHoldingCost, total: annualOrderingCost + annualHoldingCost };
+  }
+
+  // SS = z × σd × sqrt(L): demand varies from day to day, lead time is constant.
+  function calculateSafetyStock({ z, demandStdDev, leadTime }) {
+    return z * demandStdDev * Math.sqrt(leadTime);
+  }
+
+  // ROP = d × L + SS
+  function calculateReorderPoint({ dailyDemand, leadTime, safetyStock }) {
+    return dailyDemand * leadTime + safetyStock;
+  }
+
+  // Next whole unit up, ignoring float residue (50.0000000001 stays 50).
+  const roundUpUnits = (n) => Math.ceil(n - 1e-9);
+
+  // Parses and checks one typed input against its rule.
+  // Returns { value } (undefined for a blank optional field) or { error: messageKey }.
+  function parseInventoryField(raw, rule, lang) {
+    const parsed = parseInput(raw === undefined ? '' : raw, lang);
+    if (parsed.status === 'empty') return rule.optional ? {} : { error: 'error.required' };
+    if (parsed.status === 'invalid') return { error: 'error.invalid' };
+    if (!Number.isFinite(parsed.value)) return { error: 'error.tooLarge' };
+    if (parsed.value < 0) return { error: 'error.negative' };
+    if (rule.positive && parsed.value === 0) return { error: 'error.positive' };
+    if (rule.integer && !Number.isInteger(parsed.value)) return { error: 'error.wholeNumber' };
+    return { value: parsed.value };
+  }
+
+  // Full pipeline for the inventory module.
+  // rawInputs: the typed fields of INVENTORY_FIELDS, plus serviceLevel (an id from
+  //   SERVICE_LEVELS) and manualSafetyStock (true = use the typed safetyStock).
+  // Returns { fieldErrors, values, ordering, replenishment }. `ordering` and
+  // `replenishment` are null when any input of that group is invalid, so no
+  // result is ever built on bad input; the two groups do not block each other.
+  function evaluateInventory(rawInputs, lang) {
+    const manual = Boolean(rawInputs.manualSafetyStock);
+    const values = {};
+    const fieldErrors = {};
+    const groupValid = { ordering: true, replenishment: true };
+
+    Object.keys(INVENTORY_FIELDS).forEach((field) => {
+      const rule = INVENTORY_FIELDS[field];
+      if (rule.mode && rule.mode !== (manual ? 'manual' : 'calculated')) return;
+      const outcome = parseInventoryField(rawInputs[field], rule, lang);
+      if (outcome.error) {
+        fieldErrors[field] = outcome.error;
+        groupValid[rule.group] = false;
+      } else if (outcome.value !== undefined) {
+        values[field] = outcome.value;
+      }
+    });
+
+    let ordering = null;
+    if (groupValid.ordering) {
+      const eoq = calculateEoq(values);
+      const usesCustomQuantity = values.orderQuantity !== undefined;
+      const quantity = usesCustomQuantity ? values.orderQuantity : eoq;
+      const optimalCost = calculateInventoryCost(Object.assign({}, values, { orderQuantity: eoq }));
+      const cost = usesCustomQuantity ? calculateInventoryCost(values) : optimalCost;
+      ordering = {
+        eoq,
+        eoqRounded: Math.max(1, Math.round(eoq)),
+        usesCustomQuantity,
+        quantity,
+        cost,
+        optimalCost,
+        penalty: cost.total - optimalCost.total,
+        penaltyRatio: (cost.total - optimalCost.total) / optimalCost.total,
+        daysBetweenOrders: (quantity / values.annualDemand) * DAYS_PER_YEAR,
+        averageCycleStock: quantity / 2,
+      };
+      if (![eoq, cost.total, optimalCost.total].every(Number.isFinite) || eoq === 0) {
+        ordering = null;
+        fieldErrors.annualDemand = 'error.tooLarge';
+      }
+    }
+
+    let replenishment = null;
+    if (groupValid.replenishment) {
+      const serviceLevel = SERVICE_LEVELS.find((option) => option.id === rawInputs.serviceLevel)
+        || SERVICE_LEVELS.find((option) => option.id === DEFAULT_SERVICE_LEVEL);
+      const safetyStockExact = manual
+        ? values.safetyStock
+        : calculateSafetyStock({ z: serviceLevel.z, demandStdDev: values.demandStdDev, leadTime: values.leadTime });
+      // The stock actually held is a whole number, and the reorder point is built on it.
+      const safetyStock = roundUpUnits(safetyStockExact);
+      const reorderPointExact = calculateReorderPoint({
+        dailyDemand: values.dailyDemand,
+        leadTime: values.leadTime,
+        safetyStock,
+      });
+      replenishment = {
+        manual,
+        z: manual ? null : serviceLevel.z,
+        serviceLevel: manual ? null : serviceLevel.level,
+        safetyStockExact,
+        safetyStock,
+        leadTimeDemand: values.dailyDemand * values.leadTime,
+        reorderPointExact,
+        reorderPoint: roundUpUnits(reorderPointExact),
+        variabilityWarning: !manual && values.demandStdDev > values.dailyDemand,
+      };
+      if (!Number.isFinite(reorderPointExact)) {
+        replenishment = null;
+        fieldErrors.dailyDemand = 'error.tooLarge';
+      }
+    }
+
+    return { fieldErrors, values, ordering, replenishment };
+  }
+
   // Lets the calculation logic be tested from Node without a browser.
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
       CATEGORIES, I18N, translate, convert, normalizeInput, parseInput, localizeInput, formatNumber, toPlainString, evaluate,
-      calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent,
+      calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent, formatFixed,
+      SERVICE_LEVELS, calculateEoq, calculateInventoryCost, calculateSafetyStock, calculateReorderPoint, evaluateInventory,
     };
   }
   if (typeof document === 'undefined') return;
@@ -998,7 +1278,138 @@
   }
 
   /* ------------------------------------------------------------------------
-     6. Site UI
+     6. Inventory calculator UI
+     ------------------------------------------------------------------------ */
+  function initInventory() {
+    const form = document.getElementById('inv-form');
+    if (!form) return;
+
+    const byId = (id) => document.getElementById(id);
+    const inputs = {
+      annualDemand: byId('inv-demand'),
+      orderingCost: byId('inv-order-cost'),
+      holdingCost: byId('inv-holding-cost'),
+      orderQuantity: byId('inv-quantity'),
+      dailyDemand: byId('inv-daily'),
+      leadTime: byId('inv-lead'),
+      demandStdDev: byId('inv-sigma'),
+      safetyStock: byId('inv-safety'),
+    };
+    const fields = Object.keys(inputs);
+    const manualToggle = byId('inv-manual');
+    const serviceSelect = byId('inv-service');
+    const setText = (id, text) => {
+      byId(id).textContent = text;
+    };
+
+    function fillServiceLevels() {
+      const selected = serviceSelect.value || DEFAULT_SERVICE_LEVEL;
+      serviceSelect.textContent = '';
+      SERVICE_LEVELS.forEach((option) => {
+        const element = document.createElement('option');
+        element.value = option.id;
+        element.textContent = t('inv.service.option', {
+          level: option.level.toLocaleString(localeOf(lang).tag, { style: 'percent', maximumFractionDigits: 1 }),
+          z: formatFixed(option.z, lang, 3),
+        });
+        serviceSelect.appendChild(element);
+      });
+      serviceSelect.value = selected;
+    }
+
+    function showMode() {
+      byId('inv-calculated-fields').hidden = manualToggle.checked;
+      byId('inv-manual-fields').hidden = !manualToggle.checked;
+    }
+
+    function update() {
+      const raw = { serviceLevel: serviceSelect.value, manualSafetyStock: manualToggle.checked };
+      fields.forEach((field) => {
+        raw[field] = inputs[field].value;
+      });
+      const { fieldErrors, values, ordering, replenishment } = evaluateInventory(raw, lang);
+      const number = (n) => formatNumber(n, lang);
+      const money = (n) => formatFixed(n, lang, 2);
+
+      fields.forEach((field) => {
+        const key = fieldErrors[field];
+        inputs[field].setAttribute('aria-invalid', String(Boolean(key)));
+        byId(inputs[field].id + '-error').textContent = key ? t(key) : '';
+      });
+
+      // Ordering group: EOQ and annual cost
+      byId('inv-ordering-status').hidden = Boolean(ordering);
+      byId('inv-optimal-row').hidden = !(ordering && ordering.usesCustomQuantity);
+      byId('inv-penalty-row').hidden = !(ordering && ordering.usesCustomQuantity);
+      if (ordering) {
+        setText('inv-eoq-value', number(ordering.eoqRounded));
+        setText('inv-eoq-detail', t('inv.eoq.exact', { value: number(ordering.eoq) }));
+        setText('inv-cost-value', money(ordering.cost.total));
+        setText('inv-cost-detail', ordering.usesCustomQuantity
+          ? t('inv.cost.atQ', { q: number(ordering.quantity) })
+          : t('inv.cost.atEoq'));
+        setText('inv-ordering-cost', money(ordering.cost.orderingCost));
+        setText('inv-holding-cost-total', money(ordering.cost.holdingCost));
+        setText('inv-optimal-cost', money(ordering.optimalCost.total));
+        setText('inv-penalty', money(ordering.penalty) + ' (' + formatPercent(ordering.penaltyRatio, lang) + ')');
+        setText('inv-orders', formatFixed(ordering.cost.ordersPerYear, lang, 2));
+        setText('inv-interval', formatFixed(ordering.daysBetweenOrders, lang, 1));
+        setText('inv-cycle-stock', number(ordering.averageCycleStock));
+      } else {
+        ['inv-eoq-value', 'inv-cost-value', 'inv-ordering-cost', 'inv-holding-cost-total', 'inv-optimal-cost',
+          'inv-penalty', 'inv-orders', 'inv-interval', 'inv-cycle-stock'].forEach((id) => setText(id, EMPTY_RESULT));
+        setText('inv-eoq-detail', '');
+        setText('inv-cost-detail', '');
+      }
+
+      // Replenishment group: safety stock and reorder point
+      byId('inv-replenishment-status').hidden = Boolean(replenishment);
+      byId('inv-warning').hidden = !(replenishment && replenishment.variabilityWarning);
+      if (replenishment) {
+        setText('inv-ss-value', number(replenishment.safetyStock));
+        setText('inv-ss-detail', replenishment.manual
+          ? t('inv.ss.manual')
+          : t('inv.ss.calc', { value: number(replenishment.safetyStockExact), z: formatFixed(replenishment.z, lang, 3) }));
+        setText('inv-rop-value', number(replenishment.reorderPoint));
+        setText('inv-rop-detail', t('inv.rop.detail', {
+          demand: number(replenishment.leadTimeDemand),
+          ss: number(replenishment.safetyStock),
+        }));
+        setText('inv-lead-demand', number(replenishment.leadTimeDemand));
+        setText('inv-z', replenishment.manual ? EMPTY_RESULT : formatFixed(replenishment.z, lang, 3));
+      } else {
+        ['inv-ss-value', 'inv-rop-value', 'inv-lead-demand', 'inv-z'].forEach((id) => setText(id, EMPTY_RESULT));
+        setText('inv-ss-detail', '');
+        setText('inv-rop-detail', '');
+      }
+
+      // Uses one input from each group, so it needs both to be present.
+      const hasBothDemands = values.annualDemand !== undefined && values.dailyDemand !== undefined;
+      setText('inv-implied-days', hasBothDemands ? number(values.annualDemand / values.dailyDemand) : EMPTY_RESULT);
+    }
+
+    fields.forEach((field) => inputs[field].addEventListener('input', update));
+    serviceSelect.addEventListener('change', update);
+    manualToggle.addEventListener('change', () => {
+      showMode();
+      update();
+    });
+    form.addEventListener('submit', (event) => event.preventDefault());
+    languageListeners.push((previousLang) => {
+      fields.forEach((field) => {
+        inputs[field].value = localizeInput(inputs[field].value, previousLang, lang);
+      });
+      fillServiceLevels();
+      update();
+    });
+
+    fillServiceLevels();
+    showMode();
+    update();
+  }
+
+  /* ------------------------------------------------------------------------
+     7. Site UI
      ------------------------------------------------------------------------ */
 
   // Writes the current language into every element marked with data-i18n
@@ -1120,6 +1531,7 @@
   initConvertLab();
   initHeroPreview();
   initOee();
+  initInventory();
   initTheme();
   initNav();
   initReveal();

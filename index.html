@@ -66,6 +66,7 @@
         <a href="#modules" data-i18n="nav.modules">Modules</a>
         <a href="#convertlab">ConvertLab</a>
         <a href="#oee">OEE</a>
+        <a href="#inventory" data-i18n="nav.inventory">Inventory</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
         <a class="btn btn-primary btn-small" href="#convertlab" data-i18n="nav.open">Open ConvertLab</a>
       </div>
@@ -104,7 +105,7 @@
             <a class="btn btn-secondary" href="#modules" data-i18n="hero.explore">Explore Modules</a>
           </div>
           <dl class="spec-row">
-            <div><dt data-i18n="spec.tools">Tools</dt><dd>02 <span data-i18n="spec.of">of 04</span></dd></div>
+            <div><dt data-i18n="spec.tools">Tools</dt><dd>03 <span data-i18n="spec.of">of 04</span></dd></div>
             <div><dt data-i18n="spec.categories">Categories</dt><dd>05</dd></div>
             <div><dt data-i18n="spec.units">Units</dt><dd>34</dd></div>
           </dl>
@@ -177,7 +178,7 @@
         <header class="section-head reveal">
           <p class="tech-label" data-i18n="modules.label">Sec. 01 — Tool directory</p>
           <h2 id="modules-title" data-i18n="modules.title">Modules</h2>
-          <p data-i18n="modules.intro">Two tools are available today. Two more are in development on the same foundation.</p>
+          <p data-i18n="modules.intro">Three tools are available today. One more is in development on the same foundation.</p>
         </header>
 
         <div class="tool-grid">
@@ -240,10 +241,10 @@
             <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
 
-          <article class="tool-card reveal">
+          <article class="tool-card tool-card-live reveal">
             <div class="tool-meta">
               <span class="tech-label"><span data-i18n="tool.word">Tool</span> 03</span>
-              <span class="status status-soon" data-i18n="status.soon">Coming Soon</span>
+              <span class="status status-live" data-i18n="status.available">Available</span>
             </div>
             <div class="tool-art">
               <svg class="ill" viewBox="0 0 240 132" aria-hidden="true" focusable="false">
@@ -264,8 +265,9 @@
                 <text class="note" x="12" y="16"><tspan data-i18n="svg.fig">FIG.</tspan> 03</text>
               </svg>
             </div>
-            <h3 data-i18n="tool3.title">Inventory Management</h3>
+            <h3><a class="stretched-link" href="#inventory" data-i18n="tool3.title">Inventory Management</a></h3>
             <p data-i18n="tool3.desc">Order quantities, reorder points and safety stock with worked results.</p>
+            <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
 
           <article class="tool-card reveal">
@@ -493,11 +495,202 @@
       </div>
     </section>
 
-    <!-- Pricing (demonstration only) -->
-    <section class="section" id="pricing" aria-labelledby="pricing-title">
+    <!-- Inventory Management calculator -->
+    <section class="section" id="inventory" aria-labelledby="inventory-title">
       <div class="container">
         <header class="section-head reveal">
-          <p class="tech-label" data-i18n="pricing.label">Sec. 04 — Plans</p>
+          <p class="tech-label" data-i18n="inv.label">Sec. 04 — Tool 03</p>
+          <h2 id="inventory-title" data-i18n="tool3.title">Inventory Management</h2>
+          <p data-i18n="inv.intro">Work out how much to order, when to reorder and what it costs per year for one stocked item.</p>
+        </header>
+
+        <div class="calc reveal">
+          <form class="calc-inputs" id="inv-form" novalidate aria-label="Inventory inputs" data-i18n-attr="aria-label:inv.inputs">
+            <fieldset class="field-group">
+              <legend class="tech-label" data-i18n="inv.group.ordering">Ordering</legend>
+
+              <div class="field">
+                <label class="field-label" for="inv-demand" data-i18n="inv.demand">Annual demand (D)</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-demand" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="12000" aria-describedby="inv-demand-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="inv.unit.unitsYear">units/yr</span>
+                </div>
+                <p class="field-error" id="inv-demand-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="inv-order-cost" data-i18n="inv.orderCost">Ordering cost (S)</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-order-cost" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="100" aria-describedby="inv-order-cost-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="inv.unit.perOrder">per order</span>
+                </div>
+                <p class="field-error" id="inv-order-cost-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="inv-holding-cost" data-i18n="inv.holdingCost">Annual holding cost (H)</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-holding-cost" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="6" aria-describedby="inv-holding-cost-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="inv.unit.perUnitYear">per unit/yr</span>
+                </div>
+                <p class="field-error" id="inv-holding-cost-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="inv-quantity" data-i18n="inv.quantity">Order quantity (Q), optional</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-quantity" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="" aria-describedby="inv-quantity-hint inv-quantity-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="oee.unit.units">units</span>
+                </div>
+                <p class="field-hint" id="inv-quantity-hint" data-i18n="inv.quantity.hint">Leave blank to use the EOQ.</p>
+                <p class="field-error" id="inv-quantity-error"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="field-group">
+              <legend class="tech-label" data-i18n="inv.group.replenishment">Replenishment</legend>
+
+              <div class="field">
+                <label class="field-label" for="inv-daily" data-i18n="inv.daily">Average daily demand (d)</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-daily" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="40" aria-describedby="inv-daily-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="inv.unit.unitsDay">units/day</span>
+                </div>
+                <p class="field-error" id="inv-daily-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="inv-lead" data-i18n="inv.lead">Lead time (L)</label>
+                <div class="field-box">
+                  <input class="field-value" id="inv-lead" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="9" aria-describedby="inv-lead-error" aria-invalid="false">
+                  <span class="unit-tag" data-i18n="inv.unit.days">days</span>
+                </div>
+                <p class="field-error" id="inv-lead-error"></p>
+              </div>
+
+              <label class="check" for="inv-manual">
+                <input type="checkbox" id="inv-manual">
+                <span data-i18n="inv.manual">Enter safety stock manually</span>
+              </label>
+
+              <div class="field-group" id="inv-calculated-fields">
+                <div class="field">
+                  <label class="field-label" for="inv-sigma" data-i18n="inv.sigma">Daily demand standard deviation (σd)</label>
+                  <div class="field-box">
+                    <input class="field-value" id="inv-sigma" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="10" aria-describedby="inv-sigma-error" aria-invalid="false">
+                    <span class="unit-tag" data-i18n="inv.unit.unitsDay">units/day</span>
+                  </div>
+                  <p class="field-error" id="inv-sigma-error"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field-label" for="inv-service" data-i18n="inv.service">Target service level</label>
+                  <div class="field-box">
+                    <select class="field-select" id="inv-service"></select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-group" id="inv-manual-fields" hidden>
+                <div class="field">
+                  <label class="field-label" for="inv-safety" data-i18n="inv.safety">Safety stock (SS)</label>
+                  <div class="field-box">
+                    <input class="field-value" id="inv-safety" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="50" aria-describedby="inv-safety-error" aria-invalid="false">
+                    <span class="unit-tag" data-i18n="oee.unit.units">units</span>
+                  </div>
+                  <p class="field-error" id="inv-safety-error"></p>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="calc-results" aria-live="polite">
+            <p class="calc-status" id="inv-ordering-status" data-i18n="inv.invalid.ordering" hidden>Correct the highlighted ordering inputs to see EOQ and cost results.</p>
+            <p class="calc-status" id="inv-replenishment-status" data-i18n="inv.invalid.replenishment" hidden>Correct the highlighted replenishment inputs to see safety stock and reorder point.</p>
+
+            <div class="metric-grid metric-grid-2">
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="inv.eoq.title">Economic order quantity</h3>
+                  <span class="status">EOQ</span>
+                </div>
+                <p class="metric-value"><span id="inv-eoq-value">—</span> <span class="metric-unit" data-i18n="oee.unit.units">units</span></p>
+                <p class="metric-detail" id="inv-eoq-detail"></p>
+              </article>
+
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="inv.cost.title">Total relevant annual cost</h3>
+                </div>
+                <p class="metric-value" id="inv-cost-value">—</p>
+                <p class="metric-detail" id="inv-cost-detail"></p>
+              </article>
+
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="inv.ss.title">Safety stock</h3>
+                  <span class="status">SS</span>
+                </div>
+                <p class="metric-value"><span id="inv-ss-value">—</span> <span class="metric-unit" data-i18n="oee.unit.units">units</span></p>
+                <p class="metric-detail" id="inv-ss-detail"></p>
+              </article>
+
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="inv.rop.title">Reorder point</h3>
+                  <span class="status">ROP</span>
+                </div>
+                <p class="metric-value"><span id="inv-rop-value">—</span> <span class="metric-unit" data-i18n="oee.unit.units">units</span></p>
+                <p class="metric-detail" id="inv-rop-detail"></p>
+              </article>
+            </div>
+
+            <p class="calc-warning" id="inv-warning" data-i18n="inv.warning.variability" hidden>The standard deviation is larger than average daily demand. A normal distribution fits such demand poorly, so treat this safety stock with caution.</p>
+
+            <div>
+              <p class="tech-label" data-i18n="inv.costs">Cost breakdown</p>
+              <dl class="calc-facts">
+                <div><dt data-i18n="inv.fact.ordering">Annual ordering cost</dt><dd id="inv-ordering-cost">—</dd></div>
+                <div><dt data-i18n="inv.fact.holding">Annual holding cost</dt><dd id="inv-holding-cost-total">—</dd></div>
+                <div id="inv-optimal-row" hidden><dt data-i18n="inv.fact.optimal">Cost at EOQ</dt><dd id="inv-optimal-cost">—</dd></div>
+                <div id="inv-penalty-row" hidden><dt data-i18n="inv.fact.penalty">Extra cost vs EOQ</dt><dd id="inv-penalty">—</dd></div>
+              </dl>
+              <p class="calc-muted" data-i18n="inv.costNote">Purchase cost of the items is excluded: it does not change with the order quantity. Costs are in the currency you entered.</p>
+            </div>
+
+            <div>
+              <p class="tech-label" data-i18n="inv.supporting">Supporting calculations</p>
+              <dl class="calc-facts">
+                <div><dt data-i18n="inv.fact.orders">Orders per year</dt><dd id="inv-orders">—</dd></div>
+                <div><dt data-i18n="inv.fact.interval">Days between orders (365-day year)</dt><dd id="inv-interval">—</dd></div>
+                <div><dt data-i18n="inv.fact.cycleStock">Average cycle stock (Q/2)</dt><dd id="inv-cycle-stock">—</dd></div>
+                <div><dt data-i18n="inv.fact.leadDemand">Demand during lead time (d × L)</dt><dd id="inv-lead-demand">—</dd></div>
+                <div><dt data-i18n="inv.fact.z">z-score</dt><dd id="inv-z">—</dd></div>
+                <div><dt data-i18n="inv.fact.days">Operating days implied (D ÷ d)</dt><dd id="inv-implied-days">—</dd></div>
+              </dl>
+            </div>
+
+            <section class="calc-notes" aria-label="Rounding and assumptions" data-i18n-attr="aria-label:inv.notes">
+              <p class="tech-label" data-i18n="inv.rounding.title">Rounding</p>
+              <p class="calc-notes-text" data-i18n="inv.rounding.text">Safety stock and reorder point are rounded up to whole units: rounding down would give less protection than the chosen service level. EOQ is rounded to the nearest whole unit; total cost changes very little near the optimum, so a convenient pack size close to the EOQ is fine.</p>
+              <p class="tech-label calc-notes-heading" data-i18n="inv.assumptions.title">Assumptions</p>
+              <ul class="calc-list">
+                <li data-i18n="inv.assume.1">Daily demand is roughly normally distributed and independent from day to day.</li>
+                <li data-i18n="inv.assume.2">Lead time is constant; only demand varies.</li>
+                <li data-i18n="inv.assume.3">Service level is the probability of not running out during one replenishment cycle, not the share of demand filled.</li>
+                <li data-i18n="inv.assume.4">EOQ assumes steady demand, fixed ordering and holding costs, and no quantity discounts.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing (demonstration only) -->
+    <section class="section section-tint" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="tech-label" data-i18n="pricing.label">Sec. 05 — Plans</p>
           <h2 id="pricing-title" data-i18n="pricing.title">Pricing</h2>
           <p class="demo-note"><strong data-i18n="pricing.demoStrong">Demonstration only.</strong> <span data-i18n="pricing.demoText">These plans are examples. No payments or subscriptions are available.</span></p>
         </header>
@@ -546,6 +739,7 @@
         <a href="#modules" data-i18n="nav.modules">Modules</a>
         <a href="#convertlab">ConvertLab</a>
         <a href="#oee">OEE</a>
+        <a href="#inventory" data-i18n="nav.inventory">Inventory</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
       </nav>
       <p class="footer-note">&copy; <span id="footer-year">2026</span> <span data-i18n="footer.note">IE Toolkit. Built for industrial engineers.</span></p>

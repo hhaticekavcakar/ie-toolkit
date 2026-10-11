@@ -3,7 +3,7 @@
    1. Design tokens
    2. Base
    3. Layout helpers and notebook details
-   4. Components (nav, buttons, hero, preview, directory, converter, OEE, pricing, footer)
+   4. Components (nav, buttons, hero, preview, directory, converter, OEE, inventory, pricing, footer)
    5. Illustrations
    6. Motion
    7. Responsive
@@ -1107,8 +1107,10 @@ output.field-value {
   margin-top: 6px;
 }
 
-/* OEE calculator: inputs on the left, dashboard on the right */
-.oee {
+/* Calculator layout (OEE and inventory): inputs on the left, dashboard on the right.
+   The .oee-* names are the OEE module; .calc-* are the same rules for other modules. */
+.oee,
+.calc {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
   overflow: hidden;
@@ -1118,13 +1120,19 @@ output.field-value {
   box-shadow: var(--shadow-md);
 }
 
-.oee-inputs {
+.oee-inputs,
+.calc-inputs {
   display: grid;
   align-content: start;
   gap: 12px;
   padding: clamp(16px, 2.6vw, 28px);
   border-right: 1px solid var(--border);
   background: var(--surface-soft);
+}
+
+/* Lets a field shrink with its grid column instead of holding the input's default width */
+.field {
+  min-width: 0;
 }
 
 .field-label {
@@ -1135,11 +1143,13 @@ output.field-value {
   font-weight: 600;
 }
 
-.oee-inputs .field-box {
+.oee-inputs .field-box,
+.calc-inputs .field-box {
   min-height: 44px;
 }
 
-.oee-inputs .field-value {
+.oee-inputs .field-value,
+.calc-inputs .field-value {
   font-size: 1.05rem;
 }
 
@@ -1158,7 +1168,8 @@ output.field-value {
   margin-top: 5px;
 }
 
-.oee-results {
+.oee-results,
+.calc-results {
   display: grid;
   align-content: start;
   gap: 20px;
@@ -1277,22 +1288,26 @@ output.field-value {
   line-height: 1.4;
 }
 
-.oee-facts {
+.oee-facts,
+.calc-facts {
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid var(--border);
 }
 
-.oee-facts > div {
+.oee-facts > div,
+.calc-facts > div {
   padding: 10px 28px 0 0;
 }
 
-.oee-facts > div + div {
+.oee-facts > div + div,
+.calc-facts > div + div {
   padding-left: 20px;
   border-left: 1px solid var(--border);
 }
 
-.oee-facts dt {
+.oee-facts dt,
+.calc-facts dt {
   color: var(--text-muted);
   font-size: 0.68rem;
   font-weight: 600;
@@ -1300,20 +1315,23 @@ output.field-value {
   text-transform: uppercase;
 }
 
-.oee-facts dd {
+.oee-facts dd,
+.calc-facts dd {
   color: var(--ink);
   font-size: 1.05rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
-.oee-facts dd span + span {
+.oee-facts dd span + span,
+.calc-facts dd span + span {
   color: var(--text-muted);
   font-size: 0.85rem;
   font-weight: 500;
 }
 
-.oee-analysis {
+.oee-analysis,
+.calc-notes {
   padding: 14px 16px;
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius-md);
@@ -1327,7 +1345,8 @@ output.field-value {
   font-weight: 600;
 }
 
-.oee-warning {
+.oee-warning,
+.calc-warning {
   margin-top: 10px;
   padding: 8px 12px;
   border-left: 2px solid var(--warning);
@@ -1337,10 +1356,158 @@ output.field-value {
   font-weight: 500;
 }
 
-.oee-disclaimer {
+.oee-disclaimer,
+.calc-muted {
   margin-top: 10px;
   color: var(--text-muted);
   font-size: 0.82rem;
+}
+
+/* Inventory calculator: additions to the shared calculator styles above */
+.field-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field-group > legend {
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+/* Divider under the first input group (a bottom border, so it never cuts through a legend) */
+.calc-inputs > .field-group:first-child {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.field-hint {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.field-select {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 34px 8px 14px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field-select:focus {
+  outline: none;
+}
+
+.field-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.calc-status {
+  padding: 8px 12px;
+  border-left: 2px solid var(--danger);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-soft);
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.metric-value {
+  overflow-wrap: anywhere;
+}
+
+.metric-unit {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Fact rows as an even grid: they wrap cleanly, and labels keep their case
+   because symbols such as d and D mean different things. */
+.calc-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 2px 20px;
+  margin-top: 6px;
+}
+
+.calc-facts > div,
+.calc-facts > div + div {
+  padding: 10px 0 0;
+  border-left: 0;
+}
+
+.calc-facts dt {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.calc-results > .calc-warning,
+.calc-results .calc-muted {
+  margin-top: 0;
+}
+
+.calc-results .calc-muted {
+  margin-top: 10px;
+}
+
+.calc-notes-text {
+  margin-top: 6px;
+}
+
+.calc-notes-heading {
+  margin-top: 14px;
+}
+
+.calc-list {
+  display: grid;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding-left: 18px;
 }
 
 /* Pricing */
@@ -1591,19 +1758,27 @@ output.field-value {
     max-width: 300px;
   }
 
-  .oee {
+  .oee,
+  .calc {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .oee-inputs {
+  .oee-inputs,
+  .calc-inputs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 16px;
     border-right: 0;
     border-bottom: 1px solid var(--border);
   }
 
-  .oee-inputs > .tech-label {
+  .oee-inputs > .tech-label,
+  .calc-inputs > .tech-label {
     grid-column: 1 / -1;
+  }
+
+  .calc-inputs > .field-group:first-child {
+    padding-bottom: 0;
+    border-bottom: 0;
   }
 }
 
@@ -1629,7 +1804,7 @@ output.field-value {
 
 /* Collapsed navigation: links move into the menu; the theme and language
    controls stay in the bar beside the menu button. */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .nav-toggle {
     display: block;
   }
@@ -1674,7 +1849,17 @@ output.field-value {
 }
 
 @media (max-width: 640px) {
+  .calc-inputs > .field-group:first-child {
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric-grid-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .oee-inputs,
+  .calc-inputs,
   .metric-grid {
     grid-template-columns: minmax(0, 1fr);
   }
