@@ -1798,10 +1798,27 @@ output.field-value {
   color: var(--accent-hover);
 }
 
-.footer-note {
+.footer-note,
+.footer-credit {
   flex-basis: 100%;
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.footer-credit {
+  margin-top: -6px;
+}
+
+.footer-credit a {
+  color: var(--accent-hover);
+  font-weight: 600;
+  text-decoration: underline transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.footer-credit a:hover {
+  text-decoration-color: currentColor;
 }
 
 /* --------------------------------------------------------------------------

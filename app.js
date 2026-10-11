@@ -366,6 +366,9 @@
       'pro.f3': 'Export to PDF and spreadsheet (example)',
 
       'footer.note': 'IE Toolkit. Built for industrial engineers.',
+      // The author's name is a link placed between these two parts.
+      'footer.creditBefore': 'Created by ',
+      'footer.creditAfter': '',
 
       'svg.fig': 'FIG.',
       'svg.flow': 'FLOW →',
@@ -675,6 +678,8 @@
       'pro.f3': 'PDF ve tablo dışa aktarımı (örnek)',
 
       'footer.note': 'IE Toolkit. Endüstri mühendisleri için geliştirildi.',
+      'footer.creditBefore': '',
+      'footer.creditAfter': ' tarafından geliştirildi.',
 
       'svg.fig': 'ŞEK.',
       'svg.flow': 'AKIŞ →',
