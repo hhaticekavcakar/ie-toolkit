@@ -3,7 +3,7 @@
    1. Design tokens
    2. Base
    3. Layout helpers and notebook details
-   4. Components (nav, buttons, hero, preview, directory, converter, OEE, inventory, pricing, footer)
+   4. Components (nav, buttons, hero, preview, directory, converter, OEE, inventory, capacity, pricing, footer)
    5. Illustrations
    6. Motion
    7. Responsive
@@ -1510,6 +1510,152 @@ output.field-value {
   padding-left: 18px;
 }
 
+/* Capacity planning: station rows and the station capacity bar chart */
+.station-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.station {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.station-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.station-tag {
+  color: var(--ink);
+}
+
+.station-remove {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Larger hit area for touch without changing the visual size */
+.station-remove::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.station-remove:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.station-remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.station-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.station .field-label {
+  font-size: 0.8rem;
+}
+
+.station-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.station-actions .field-hint {
+  margin-top: 0;
+}
+
+.metric-value-text {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.bar-list {
+  display: grid;
+  gap: 10px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 12px;
+  font-size: 0.9rem;
+}
+
+.bar-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.bar-name-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.bar-row .meter {
+  display: block;
+  height: 10px;
+  margin-top: 0;
+  border-radius: 5px;
+}
+
+.bar-value {
+  min-width: 5.5rem;
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* The bottleneck is marked by its tag text as well as by colour */
+.bar-row.is-bottleneck .meter-fill {
+  background: var(--warning);
+}
+
+.bar-tag {
+  border-color: var(--warning);
+  color: var(--warning);
+}
+
 /* Pricing */
 .demo-note {
   padding: 8px 12px;
@@ -1804,7 +1950,7 @@ output.field-value {
 
 /* Collapsed navigation: links move into the menu; the theme and language
    controls stay in the bar beside the menu button. */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .nav-toggle {
     display: block;
   }
@@ -1866,6 +2012,15 @@ output.field-value {
 }
 
 @media (max-width: 520px) {
+  .bar-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .bar-row .meter {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
   .tool-grid {
     grid-template-columns: minmax(0, 1fr);
   }

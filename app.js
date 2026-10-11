@@ -2,11 +2,12 @@
    IE Toolkit — app.js
    1. Conversion data      (edit here to add units or categories)
    2. Translations         (one dictionary for every user-facing string)
-   3. Pure functions       (unit conversion, number parsing/formatting, OEE, inventory)
+   3. Pure functions       (unit conversion, number parsing/formatting, OEE, inventory, capacity)
    4. ConvertLab UI        (full converter + hero preview)
    5. OEE calculator UI
    6. Inventory calculator UI
-   7. Site UI             (language, theme, mobile nav, scroll reveal, footer year)
+   7. Capacity planning UI
+   8. Site UI            (language, theme, mobile nav, scroll reveal, footer year)
    ========================================================================== */
 (function () {
   'use strict';
@@ -123,6 +124,7 @@
 
       'nav.modules': 'Modules',
       'nav.inventory': 'Inventory',
+      'nav.capacity': 'Capacity',
       'nav.pricing': 'Pricing',
       'nav.open': 'Open ConvertLab',
 
@@ -147,7 +149,7 @@
 
       'modules.label': 'Sec. 01 — Tool directory',
       'modules.title': 'Modules',
-      'modules.intro': 'Three tools are available today. One more is in development on the same foundation.',
+      'modules.intro': 'All four tools are available, built on the same foundation.',
       'tool.word': 'Tool',
       'tool.open': 'Open tool',
       'tool1.desc': 'Unit converter for length, mass, pressure, energy and temperature.',
@@ -156,7 +158,7 @@
       'tool3.title': 'Inventory Management',
       'tool3.desc': 'Order quantities, reorder points and safety stock with worked results.',
       'tool4.title': 'Capacity Planning',
-      'tool4.desc': 'Available time against demand, bottlenecks, shifts and resources.',
+      'tool4.desc': 'Utilization, efficiency and bottleneck analysis for a serial production line.',
 
       'cl.label': 'Sec. 02 — Tool 01',
       'cl.intro': 'Pick a category, enter a value, and the result updates as you type.',
@@ -274,7 +276,78 @@
       'error.positive': 'Must be greater than 0',
       'error.wholeNumber': 'Enter a whole number',
 
-      'pricing.label': 'Sec. 05 — Plans',
+      'cap.label': 'Sec. 05 — Tool 04',
+      'cap.intro': 'Measure how much of your capacity is used, and find the station that limits a serial production line.',
+      'cap.inputs': 'Capacity planning inputs',
+      'cap.group.capacity': 'Capacity',
+      'cap.group.stations': 'Stations',
+      'cap.period': 'Reporting period',
+      'cap.period.hint': 'All three figures must cover the same period.',
+      'cap.period.hour': 'Hour',
+      'cap.period.shift': 'Shift',
+      'cap.period.day': 'Day',
+      'cap.period.week': 'Week',
+      'cap.period.month': 'Month',
+      'cap.unit.hour': 'units/hour',
+      'cap.unit.shift': 'units/shift',
+      'cap.unit.day': 'units/day',
+      'cap.unit.week': 'units/week',
+      'cap.unit.month': 'units/month',
+      'cap.unit.perHour': 'units/h',
+      'cap.design': 'Design capacity',
+      'cap.effective': 'Effective capacity',
+      'cap.actual': 'Actual output',
+      'cap.util.title': 'Utilization',
+      'cap.util.detail': 'Actual {a} ÷ design {b} {unit}',
+      'cap.eff.title': 'Efficiency',
+      'cap.eff.detail': 'Actual {a} ÷ effective {b} {unit}',
+      'cap.summary': 'Capacity summary',
+      'cap.fact.unused': 'Unused design capacity',
+      'cap.fact.allowance': 'Planned allowance (design − effective)',
+      'cap.warning.effective': 'Actual output is above effective capacity, so efficiency exceeds 100%. The effective capacity or the output figure may be inconsistent; check that both cover the same period. The value is shown as calculated, not capped.',
+      'cap.warning.design': 'Actual output is above design capacity, so utilization exceeds 100%. Design capacity is the maximum possible output, so the inputs are inconsistent. The value is shown as calculated, not capped.',
+      'cap.error.effectiveOverDesign': 'Effective capacity cannot exceed design capacity',
+      'cap.error.name': 'Enter a station name',
+      'cap.invalid.capacity': 'Correct the highlighted capacity inputs to see utilization and efficiency.',
+      'cap.invalid.stations': 'Correct the highlighted station inputs to see the bottleneck analysis.',
+      'cap.station.name': 'Station name',
+      'cap.station.time': 'Processing time',
+      'cap.station.machines': 'Parallel machines',
+      'cap.station.remove': 'Remove station {name}',
+      'cap.station.add': 'Add station',
+      'cap.station.limit': 'Up to {max} stations.',
+      'cap.station.default.1': 'Cutting',
+      'cap.station.default.2': 'Welding',
+      'cap.station.default.3': 'Assembly',
+      'cap.station.default.4': 'Painting',
+      'cap.bottleneck.title': 'Bottleneck station',
+      'cap.bottleneck.tied': 'Tied',
+      'cap.bottleneck.tag': 'Bottleneck',
+      'cap.bottleneck.detail': 'Lowest station capacity: {value} {unit}',
+      'cap.bottleneck.detailTied': '{count} stations share the lowest capacity: {value} {unit}',
+      'cap.throughput.title': 'Maximum theoretical line throughput',
+      'cap.throughput.detail': 'Line cycle time: {value} min/unit',
+      'cap.bars': 'Station capacity comparison',
+      'cap.insights': 'Insights',
+      'cap.insight.single': '{name} limits the line: throughput cannot exceed {value} {unit}.',
+      'cap.insight.tied': '{names} are tied at {value} {unit} and limit the line together.',
+      'cap.insight.addOne': 'Adding one machine at {name} would raise line throughput to {value} {unit}.',
+      'cap.insight.addTied': 'Raising only one of the tied stations leaves throughput unchanged. Adding one machine at each would raise it to {value} {unit}.',
+      'cap.insight.spare': '{name} has the most spare capacity: at the line rate it works at {load} of its capacity.',
+      'cap.insight.balanced': 'The line is balanced: every station has the same capacity.',
+      'cap.insight.oneStation': 'With a single station, that station sets the line throughput.',
+      'cap.assumptions': 'Assumptions',
+      'cap.notes': 'Model assumptions',
+      'cap.model': 'This is a simplified theoretical model. Real lines lose capacity to stoppages, changeovers and variation, so actual throughput will be lower.',
+      'cap.assume.1': 'One product type.',
+      'cap.assume.2': 'Serial production line: every unit passes through every station in order.',
+      'cap.assume.3': 'Identical parallel machines within each station.',
+      'cap.assume.4': 'No breakdowns or setup losses.',
+      'cap.assume.5': 'No material shortages.',
+      'cap.assume.6': 'No rework loops.',
+      'cap.assume.7': 'All stations operate for the same period.',
+
+      'pricing.label': 'Sec. 06 — Plans',
       'pricing.title': 'Pricing',
       'pricing.demoStrong': 'Demonstration only.',
       'pricing.demoText': 'These plans are examples. No payments or subscriptions are available.',
@@ -357,6 +430,7 @@
 
       'nav.modules': 'Modüller',
       'nav.inventory': 'Envanter',
+      'nav.capacity': 'Kapasite',
       'nav.pricing': 'Fiyatlandırma',
       'nav.open': 'ConvertLab’i Aç',
 
@@ -381,7 +455,7 @@
 
       'modules.label': 'Böl. 01 — Araç dizini',
       'modules.title': 'Modüller',
-      'modules.intro': 'Bugün üç araç kullanıma hazır. Aynı temel üzerinde bir araç daha geliştiriliyor.',
+      'modules.intro': 'Dört aracın tümü kullanıma hazır; hepsi aynı temel üzerine kurulu.',
       'tool.word': 'Araç',
       'tool.open': 'Aracı aç',
       'tool1.desc': 'Uzunluk, kütle, basınç, enerji ve sıcaklık için birim dönüştürücü.',
@@ -390,7 +464,7 @@
       'tool3.title': 'Envanter Yönetimi',
       'tool3.desc': 'Sipariş miktarları, yeniden sipariş noktaları ve emniyet stoğu; örnek sonuçlarla.',
       'tool4.title': 'Kapasite Planlama',
-      'tool4.desc': 'Talebe karşı kullanılabilir süre, darboğazlar, vardiyalar ve kaynaklar.',
+      'tool4.desc': 'Seri üretim hattı için kullanım oranı, verimlilik ve darboğaz analizi.',
 
       'cl.label': 'Böl. 02 — Araç 01',
       'cl.intro': 'Bir kategori seçin, bir değer girin; sonuç siz yazdıkça güncellenir.',
@@ -508,7 +582,78 @@
       'error.positive': '0’dan büyük olmalıdır',
       'error.wholeNumber': 'Tam sayı girin',
 
-      'pricing.label': 'Böl. 05 — Planlar',
+      'cap.label': 'Böl. 05 — Araç 04',
+      'cap.intro': 'Kapasitenizin ne kadarının kullanıldığını ölçün ve seri bir üretim hattını sınırlayan istasyonu bulun.',
+      'cap.inputs': 'Kapasite planlama girdileri',
+      'cap.group.capacity': 'Kapasite',
+      'cap.group.stations': 'İstasyonlar',
+      'cap.period': 'Raporlama dönemi',
+      'cap.period.hint': 'Üç değer de aynı dönemi kapsamalıdır.',
+      'cap.period.hour': 'Saat',
+      'cap.period.shift': 'Vardiya',
+      'cap.period.day': 'Gün',
+      'cap.period.week': 'Hafta',
+      'cap.period.month': 'Ay',
+      'cap.unit.hour': 'adet/saat',
+      'cap.unit.shift': 'adet/vardiya',
+      'cap.unit.day': 'adet/gün',
+      'cap.unit.week': 'adet/hafta',
+      'cap.unit.month': 'adet/ay',
+      'cap.unit.perHour': 'adet/sa',
+      'cap.design': 'Tasarım kapasitesi',
+      'cap.effective': 'Etkin kapasite',
+      'cap.actual': 'Gerçekleşen üretim',
+      'cap.util.title': 'Kullanım oranı',
+      'cap.util.detail': 'Gerçekleşen {a} ÷ tasarım {b} {unit}',
+      'cap.eff.title': 'Verimlilik',
+      'cap.eff.detail': 'Gerçekleşen {a} ÷ etkin {b} {unit}',
+      'cap.summary': 'Kapasite özeti',
+      'cap.fact.unused': 'Kullanılmayan tasarım kapasitesi',
+      'cap.fact.allowance': 'Planlı pay (tasarım − etkin)',
+      'cap.warning.effective': 'Gerçekleşen üretim etkin kapasitenin üzerinde; bu nedenle verimlilik %100’ü aşıyor. Etkin kapasite veya üretim değeri tutarsız olabilir; ikisinin de aynı dönemi kapsadığını kontrol edin. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
+      'cap.warning.design': 'Gerçekleşen üretim tasarım kapasitesinin üzerinde; bu nedenle kullanım oranı %100’ü aşıyor. Tasarım kapasitesi mümkün olan en yüksek üretim olduğundan girdiler tutarsızdır. Değer sınırlandırılmadan, hesaplandığı gibi gösterilmektedir.',
+      'cap.error.effectiveOverDesign': 'Etkin kapasite tasarım kapasitesini aşamaz',
+      'cap.error.name': 'Bir istasyon adı girin',
+      'cap.invalid.capacity': 'Kullanım oranı ve verimliliği görmek için işaretli kapasite girdilerini düzeltin.',
+      'cap.invalid.stations': 'Darboğaz analizini görmek için işaretli istasyon girdilerini düzeltin.',
+      'cap.station.name': 'İstasyon adı',
+      'cap.station.time': 'İşlem süresi',
+      'cap.station.machines': 'Paralel makine',
+      'cap.station.remove': '{name} istasyonunu kaldır',
+      'cap.station.add': 'İstasyon ekle',
+      'cap.station.limit': 'En fazla {max} istasyon.',
+      'cap.station.default.1': 'Kesme',
+      'cap.station.default.2': 'Kaynak',
+      'cap.station.default.3': 'Montaj',
+      'cap.station.default.4': 'Boyama',
+      'cap.bottleneck.title': 'Darboğaz istasyonu',
+      'cap.bottleneck.tied': 'Eşit',
+      'cap.bottleneck.tag': 'Darboğaz',
+      'cap.bottleneck.detail': 'En düşük istasyon kapasitesi: {value} {unit}',
+      'cap.bottleneck.detailTied': '{count} istasyon en düşük kapasiteyi paylaşıyor: {value} {unit}',
+      'cap.throughput.title': 'Hattın en yüksek teorik üretim hızı',
+      'cap.throughput.detail': 'Hat çevrim süresi: {value} dk/adet',
+      'cap.bars': 'İstasyon kapasite karşılaştırması',
+      'cap.insights': 'Değerlendirme',
+      'cap.insight.single': 'Hattı {name} sınırlıyor: üretim hızı {value} {unit} değerini aşamaz.',
+      'cap.insight.tied': '{names} istasyonları {value} {unit} ile eşit kapasitede ve hattı birlikte sınırlıyor.',
+      'cap.insight.addOne': '{name} istasyonuna bir makine eklemek, hat üretim hızını {value} {unit} değerine çıkarır.',
+      'cap.insight.addTied': 'Eşit istasyonlardan yalnızca birini güçlendirmek üretim hızını değiştirmez. Her birine bir makine eklemek hızı {value} {unit} değerine çıkarır.',
+      'cap.insight.spare': 'En fazla boş kapasite {name} istasyonunda: hat hızında kapasitesinin {load} kadarıyla çalışır.',
+      'cap.insight.balanced': 'Hat dengeli: tüm istasyonların kapasitesi aynı.',
+      'cap.insight.oneStation': 'Tek istasyon olduğunda hat üretim hızını o istasyon belirler.',
+      'cap.assumptions': 'Varsayımlar',
+      'cap.notes': 'Model varsayımları',
+      'cap.model': 'Bu, basitleştirilmiş bir teorik modeldir. Gerçek hatlar duruşlar, ürün değişimleri ve değişkenlik nedeniyle kapasite kaybeder; gerçek üretim hızı daha düşük olur.',
+      'cap.assume.1': 'Tek ürün tipi.',
+      'cap.assume.2': 'Seri üretim hattı: her ürün tüm istasyonlardan sırayla geçer.',
+      'cap.assume.3': 'Her istasyonda özdeş paralel makineler.',
+      'cap.assume.4': 'Arıza veya hazırlık kaybı yok.',
+      'cap.assume.5': 'Malzeme eksikliği yok.',
+      'cap.assume.6': 'Yeniden işleme döngüsü yok.',
+      'cap.assume.7': 'Tüm istasyonlar aynı süre boyunca çalışır.',
+
+      'pricing.label': 'Böl. 06 — Planlar',
       'pricing.title': 'Fiyatlandırma',
       'pricing.demoStrong': 'Yalnızca gösterim amaçlıdır.',
       'pricing.demoText': 'Bu planlar örnektir. Ödeme veya abonelik alınmamaktadır.',
@@ -952,12 +1097,137 @@
     return { fieldErrors, values, ordering, replenishment };
   }
 
+  /* --- Capacity planning and bottleneck analysis --- */
+
+  const CAPACITY_PERIODS = ['hour', 'shift', 'day', 'week', 'month'];
+  const DEFAULT_CAPACITY_PERIOD = 'shift';
+  const MINUTES_PER_HOUR = 60;
+  const MAX_STATIONS = 12;
+
+  const CAPACITY_FIELDS = {
+    designCapacity: { positive: true },
+    effectiveCapacity: { positive: true },
+    actualOutput: {},
+  };
+  const STATION_FIELDS = {
+    processingTime: { positive: true },
+    machines: { positive: true, integer: true },
+  };
+
+  // Utilization = actual ÷ design, efficiency = actual ÷ effective. Ratios, never capped.
+  function calculateCapacityMetrics({ designCapacity, effectiveCapacity, actualOutput }) {
+    return { utilization: actualOutput / designCapacity, efficiency: actualOutput / effectiveCapacity };
+  }
+
+  // rawInputs: the three typed fields of CAPACITY_FIELDS, in `lang` number format.
+  // Returns { status: 'ok', values, result, overEffective, overDesign }
+  //      or { status: 'error', fieldErrors }.
+  function evaluateCapacity(rawInputs, lang) {
+    const values = {};
+    const fieldErrors = {};
+    Object.keys(CAPACITY_FIELDS).forEach((field) => {
+      const outcome = parseInventoryField(rawInputs[field], CAPACITY_FIELDS[field], lang);
+      if (outcome.error) fieldErrors[field] = outcome.error;
+      else values[field] = outcome.value;
+    });
+    if (!fieldErrors.designCapacity && !fieldErrors.effectiveCapacity && values.effectiveCapacity > values.designCapacity) {
+      fieldErrors.effectiveCapacity = 'cap.error.effectiveOverDesign';
+    }
+    if (Object.keys(fieldErrors).length > 0) return { status: 'error', fieldErrors };
+
+    const metrics = calculateCapacityMetrics(values);
+    return {
+      status: 'ok',
+      values,
+      result: {
+        utilization: metrics.utilization,
+        efficiency: metrics.efficiency,
+        unusedCapacity: values.designCapacity - values.actualOutput,
+        plannedAllowance: values.designCapacity - values.effectiveCapacity,
+      },
+      overEffective: values.actualOutput > values.effectiveCapacity,
+      overDesign: values.actualOutput > values.designCapacity,
+    };
+  }
+
+  // Units per hour for one station: machines × 60 ÷ processing time (minutes per unit).
+  function calculateStationCapacity({ machines, processingTime }) {
+    return (machines * MINUTES_PER_HOUR) / processingTime;
+  }
+
+  // A serial line can go no faster than its slowest station. Every station at
+  // that minimum is a bottleneck; the comparison allows for float rounding so
+  // that, say, 2 machines at 6 min and 1 machine at 3 min count as tied.
+  function analyzeLine(capacities) {
+    const throughput = Math.min.apply(null, capacities);
+    const bottleneckIndexes = [];
+    capacities.forEach((capacity, index) => {
+      if (Math.abs(capacity - throughput) <= throughput * 1e-9) bottleneckIndexes.push(index);
+    });
+    return { throughput, bottleneckIndexes };
+  }
+
+  // rawStations: [{ name, processingTime, machines }] as typed, in `lang` number format.
+  // Returns { status: 'ok', stations, throughput, bottleneckIndexes, cycleTime,
+  //           maxCapacity, improvedThroughput, rowErrors }
+  //      or { status: 'error', rowErrors } — one invalid row blanks the whole line
+  //         analysis, since a result from part of the line would mislead.
+  // rowErrors is one object per station: { name?, processingTime?, machines? } of message keys.
+  function evaluateStations(rawStations, lang) {
+    const rowErrors = [];
+    const stations = [];
+    let hasError = rawStations.length === 0;
+
+    rawStations.forEach((rawStation) => {
+      const errors = {};
+      const station = { name: String(rawStation.name === undefined ? '' : rawStation.name).trim() };
+      if (station.name === '') errors.name = 'cap.error.name';
+      Object.keys(STATION_FIELDS).forEach((field) => {
+        const outcome = parseInventoryField(rawStation[field], STATION_FIELDS[field], lang);
+        if (outcome.error) errors[field] = outcome.error;
+        else station[field] = outcome.value;
+      });
+      if (Object.keys(errors).length > 0) hasError = true;
+      else station.capacity = calculateStationCapacity(station);
+      if (station.capacity !== undefined && !(Number.isFinite(station.capacity) && station.capacity > 0)) {
+        errors.processingTime = 'error.tooLarge';
+        hasError = true;
+      }
+      rowErrors.push(errors);
+      stations.push(station);
+    });
+    if (hasError) return { status: 'error', rowErrors };
+
+    const capacities = stations.map((station) => station.capacity);
+    const { throughput, bottleneckIndexes } = analyzeLine(capacities);
+    stations.forEach((station, index) => {
+      station.isBottleneck = bottleneckIndexes.includes(index);
+      station.load = throughput / station.capacity; // share of its capacity used at the line rate
+    });
+    // What the line could do with one more machine at every bottleneck station.
+    const improved = stations.map((station) => (station.isBottleneck
+      ? calculateStationCapacity({ machines: station.machines + 1, processingTime: station.processingTime })
+      : station.capacity));
+
+    return {
+      status: 'ok',
+      rowErrors,
+      stations,
+      throughput,
+      bottleneckIndexes,
+      cycleTime: MINUTES_PER_HOUR / throughput,
+      maxCapacity: Math.max.apply(null, capacities),
+      improvedThroughput: Math.min.apply(null, improved),
+    };
+  }
+
   // Lets the calculation logic be tested from Node without a browser.
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
       CATEGORIES, I18N, translate, convert, normalizeInput, parseInput, localizeInput, formatNumber, toPlainString, evaluate,
       calculateOee, validateOeeInputs, lowestOeeComponent, evaluateOee, formatPercent, formatFixed,
       SERVICE_LEVELS, calculateEoq, calculateInventoryCost, calculateSafetyStock, calculateReorderPoint, evaluateInventory,
+      MAX_STATIONS, calculateCapacityMetrics, evaluateCapacity, calculateStationCapacity, analyzeLine, evaluateStations,
     };
   }
   if (typeof document === 'undefined') return;
@@ -1409,7 +1679,324 @@
   }
 
   /* ------------------------------------------------------------------------
-     7. Site UI
+     7. Capacity planning UI
+     ------------------------------------------------------------------------ */
+  function initCapacity() {
+    const form = document.getElementById('cap-form');
+    if (!form) return;
+
+    const byId = (id) => document.getElementById(id);
+    const setText = (id, text) => {
+      byId(id).textContent = text;
+    };
+    const number = (n) => formatNumber(n, lang);
+    const create = (tag, className, text) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    };
+
+    /* --- Capacity analysis --- */
+    const capacityInputs = {
+      designCapacity: byId('cap-design'),
+      effectiveCapacity: byId('cap-effective'),
+      actualOutput: byId('cap-actual'),
+    };
+    const capacityFields = Object.keys(capacityInputs);
+    const periodSelect = byId('cap-period');
+    const utilBar = byId('cap-util-bar');
+    const effBar = byId('cap-eff-bar');
+
+    function setMeter(meter, ratio) {
+      const shown = Number.isFinite(ratio) ? Math.min(Math.max(ratio, 0), 1) : 0;
+      meter.firstElementChild.style.width = shown * 100 + '%';
+      meter.classList.toggle('is-over', Number.isFinite(ratio) && ratio > 1 + 1e-9);
+    }
+
+    function fillPeriods() {
+      const selected = periodSelect.value || DEFAULT_CAPACITY_PERIOD;
+      periodSelect.textContent = '';
+      CAPACITY_PERIODS.forEach((period) => {
+        const option = create('option', '', t('cap.period.' + period));
+        option.value = period;
+        periodSelect.appendChild(option);
+      });
+      periodSelect.value = selected;
+    }
+
+    function updateCapacity() {
+      const unit = t('cap.unit.' + periodSelect.value);
+      document.querySelectorAll('[data-cap-period-unit]').forEach((element) => {
+        element.textContent = unit;
+      });
+
+      const raw = {};
+      capacityFields.forEach((field) => {
+        raw[field] = capacityInputs[field].value;
+      });
+      const outcome = evaluateCapacity(raw, lang);
+      const isOk = outcome.status === 'ok';
+
+      capacityFields.forEach((field) => {
+        const key = isOk ? undefined : outcome.fieldErrors[field];
+        capacityInputs[field].setAttribute('aria-invalid', String(Boolean(key)));
+        byId(capacityInputs[field].id + '-error').textContent = key ? t(key) : '';
+      });
+      byId('cap-capacity-status').hidden = isOk;
+      byId('cap-warning-effective').hidden = !(isOk && outcome.overEffective);
+      byId('cap-warning-design').hidden = !(isOk && outcome.overDesign);
+
+      if (!isOk) {
+        ['cap-util-value', 'cap-eff-value', 'cap-sum-design', 'cap-sum-effective', 'cap-sum-actual',
+          'cap-sum-unused', 'cap-sum-allowance'].forEach((id) => setText(id, EMPTY_RESULT));
+        setText('cap-util-detail', '');
+        setText('cap-eff-detail', '');
+        setMeter(utilBar, NaN);
+        setMeter(effBar, NaN);
+        return;
+      }
+
+      const { values, result } = outcome;
+      setText('cap-util-value', formatPercent(result.utilization, lang));
+      setText('cap-eff-value', formatPercent(result.efficiency, lang));
+      setMeter(utilBar, result.utilization);
+      setMeter(effBar, result.efficiency);
+      setText('cap-util-detail', t('cap.util.detail', { a: number(values.actualOutput), b: number(values.designCapacity), unit }));
+      setText('cap-eff-detail', t('cap.eff.detail', { a: number(values.actualOutput), b: number(values.effectiveCapacity), unit }));
+      setText('cap-sum-design', number(values.designCapacity));
+      setText('cap-sum-effective', number(values.effectiveCapacity));
+      setText('cap-sum-actual', number(values.actualOutput));
+      setText('cap-sum-unused', number(result.unusedCapacity));
+      setText('cap-sum-allowance', number(result.plannedAllowance));
+    }
+
+    /* --- Bottleneck analysis: an editable list of stations --- */
+    const stationList = byId('cap-stations');
+    const addButton = byId('cap-add');
+    const barList = byId('cap-bars');
+    const insightList = byId('cap-insights');
+    const rows = []; // one entry per station row, in page order
+    let nextRowId = 1;
+
+    const stationTag = (index) => 'S' + (index + 1);
+    const listNames = (names) => {
+      if (typeof Intl !== 'undefined' && Intl.ListFormat) {
+        return new Intl.ListFormat(localeOf(lang).tag, { style: 'long', type: 'conjunction' }).format(names);
+      }
+      return names.join(', ');
+    };
+
+    // Builds one labelled input with its error line; returns the pieces the row needs later.
+    function buildField(rowId, key, labelKey, options) {
+      const id = 'cap-st-' + rowId + '-' + key;
+      const field = create('div', 'field');
+      const label = create('label', 'field-label');
+      label.htmlFor = id;
+      const box = create('div', 'field-box');
+      const input = create('input', 'field-value');
+      input.id = id;
+      input.type = 'text';
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      if (options.inputmode) input.setAttribute('inputmode', options.inputmode);
+      input.value = options.value;
+      input.setAttribute('aria-describedby', id + '-error');
+      input.setAttribute('aria-invalid', 'false');
+      input.addEventListener('input', updateStations);
+      box.appendChild(input);
+      let unit = null;
+      if (options.unitKey) {
+        unit = create('span', 'unit-tag');
+        box.appendChild(unit);
+      }
+      const error = create('p', 'field-error');
+      error.id = id + '-error';
+      field.appendChild(label);
+      field.appendChild(box);
+      field.appendChild(error);
+      return { field, label, labelKey, input, unit, unitKey: options.unitKey, error };
+    }
+
+    function addStation(values, focus) {
+      const rowId = nextRowId;
+      nextRowId += 1;
+      const element = create('li', 'station');
+      const head = create('div', 'station-head');
+      const tag = create('span', 'tech-label station-tag');
+      const removeButton = create('button', 'station-remove', '×');
+      removeButton.type = 'button';
+      head.appendChild(tag);
+      head.appendChild(removeButton);
+
+      const row = {
+        element,
+        tag,
+        removeButton,
+        name: buildField(rowId, 'name', 'cap.station.name', { value: values.name }),
+        processingTime: buildField(rowId, 'time', 'cap.station.time', {
+          value: values.processingTime, inputmode: 'decimal', unitKey: 'oee.unit.minPerUnit',
+        }),
+        machines: buildField(rowId, 'machines', 'cap.station.machines', { value: values.machines, inputmode: 'numeric' }),
+      };
+      const pair = create('div', 'station-pair');
+      pair.appendChild(row.processingTime.field);
+      pair.appendChild(row.machines.field);
+      element.appendChild(head);
+      element.appendChild(row.name.field);
+      element.appendChild(pair);
+
+      removeButton.addEventListener('click', () => removeStation(row));
+      rows.push(row);
+      stationList.appendChild(element);
+      labelRows();
+      updateStations();
+      if (focus) row.name.input.focus();
+    }
+
+    function removeStation(row) {
+      if (rows.length <= 1) return;
+      const index = rows.indexOf(row);
+      rows.splice(index, 1);
+      row.element.remove();
+      labelRows();
+      updateStations();
+      rows[Math.min(index, rows.length - 1)].name.input.focus();
+    }
+
+    // Everything in a row that depends on its position, its name or the language.
+    function labelRows() {
+      rows.forEach((row, index) => {
+        row.tag.textContent = stationTag(index);
+        ['name', 'processingTime', 'machines'].forEach((key) => {
+          row[key].label.textContent = t(row[key].labelKey);
+          if (row[key].unit) row[key].unit.textContent = t(row[key].unitKey);
+        });
+        const shownName = row.name.input.value.trim() || stationTag(index);
+        row.removeButton.setAttribute('aria-label', t('cap.station.remove', { name: shownName }));
+        row.removeButton.title = row.removeButton.getAttribute('aria-label');
+        row.removeButton.disabled = rows.length <= 1;
+      });
+      addButton.disabled = rows.length >= MAX_STATIONS;
+      setText('cap-limit', rows.length >= MAX_STATIONS ? t('cap.station.limit', { max: MAX_STATIONS }) : '');
+    }
+
+    function renderBars(outcome) {
+      const unit = t('cap.unit.perHour');
+      barList.textContent = '';
+      outcome.stations.forEach((station, index) => {
+        const item = create('li', 'bar-row' + (station.isBottleneck ? ' is-bottleneck' : ''));
+        const name = create('span', 'bar-name');
+        name.appendChild(create('span', 'tech-label', stationTag(index)));
+        name.appendChild(create('span', 'bar-name-text', station.name));
+        if (station.isBottleneck) name.appendChild(create('span', 'status bar-tag', t('cap.bottleneck.tag')));
+        const meter = create('span', 'meter');
+        const fill = create('span', 'meter-fill');
+        fill.style.width = (station.capacity / outcome.maxCapacity) * 100 + '%';
+        meter.appendChild(fill);
+        item.appendChild(name);
+        item.appendChild(meter);
+        item.appendChild(create('span', 'bar-value', number(station.capacity) + ' ' + unit));
+        barList.appendChild(item);
+      });
+    }
+
+    function renderInsights(outcome) {
+      const unit = t('cap.unit.perHour');
+      const bottlenecks = outcome.bottleneckIndexes.map((index) => outcome.stations[index]);
+      const names = bottlenecks.map((station) => station.name);
+      const sentences = [];
+
+      if (bottlenecks.length === 1) {
+        sentences.push(t('cap.insight.single', { name: names[0], value: number(outcome.throughput), unit }));
+        sentences.push(t('cap.insight.addOne', { name: names[0], value: number(outcome.improvedThroughput), unit }));
+      } else {
+        sentences.push(t('cap.insight.tied', { names: listNames(names), value: number(outcome.throughput), unit }));
+        sentences.push(t('cap.insight.addTied', { value: number(outcome.improvedThroughput), unit }));
+      }
+      if (outcome.stations.length === 1) {
+        sentences.push(t('cap.insight.oneStation'));
+      } else if (bottlenecks.length === outcome.stations.length) {
+        sentences.push(t('cap.insight.balanced'));
+      } else {
+        const mostSpare = outcome.stations.reduce((best, station) => (station.capacity > best.capacity ? station : best));
+        sentences.push(t('cap.insight.spare', { name: mostSpare.name, load: formatPercent(mostSpare.load, lang) }));
+      }
+
+      insightList.textContent = '';
+      sentences.forEach((sentence) => insightList.appendChild(create('li', '', sentence)));
+    }
+
+    function updateStations() {
+      const outcome = evaluateStations(rows.map((row) => ({
+        name: row.name.input.value,
+        processingTime: row.processingTime.input.value,
+        machines: row.machines.input.value,
+      })), lang);
+      const isOk = outcome.status === 'ok';
+
+      rows.forEach((row, index) => {
+        ['name', 'processingTime', 'machines'].forEach((key) => {
+          const messageKey = outcome.rowErrors[index] && outcome.rowErrors[index][key];
+          row[key].input.setAttribute('aria-invalid', String(Boolean(messageKey)));
+          row[key].error.textContent = messageKey ? t(messageKey) : '';
+        });
+      });
+      labelRows(); // remove-button labels follow the typed names
+
+      byId('cap-stations-status').hidden = isOk;
+      barList.parentElement.hidden = !isOk;
+      insightList.parentElement.hidden = !isOk;
+      byId('cap-tied-tag').hidden = !(isOk && outcome.bottleneckIndexes.length > 1);
+      if (!isOk) {
+        setText('cap-bottleneck-value', EMPTY_RESULT);
+        setText('cap-throughput-value', EMPTY_RESULT);
+        setText('cap-bottleneck-detail', '');
+        setText('cap-throughput-detail', '');
+        barList.textContent = '';
+        insightList.textContent = '';
+        return;
+      }
+
+      const unit = t('cap.unit.perHour');
+      const bottleneckNames = outcome.bottleneckIndexes.map((index) => outcome.stations[index].name);
+      setText('cap-bottleneck-value', listNames(bottleneckNames));
+      setText('cap-bottleneck-detail', bottleneckNames.length > 1
+        ? t('cap.bottleneck.detailTied', { count: bottleneckNames.length, value: number(outcome.throughput), unit })
+        : t('cap.bottleneck.detail', { value: number(outcome.throughput), unit }));
+      setText('cap-throughput-value', number(outcome.throughput));
+      setText('cap-throughput-detail', t('cap.throughput.detail', { value: number(outcome.cycleTime) }));
+      renderBars(outcome);
+      renderInsights(outcome);
+    }
+
+    capacityFields.forEach((field) => capacityInputs[field].addEventListener('input', updateCapacity));
+    periodSelect.addEventListener('change', updateCapacity);
+    addButton.addEventListener('click', () => addStation({ name: '', processingTime: '', machines: '1' }, true));
+    form.addEventListener('submit', (event) => event.preventDefault());
+    languageListeners.push((previousLang) => {
+      capacityFields.forEach((field) => {
+        capacityInputs[field].value = localizeInput(capacityInputs[field].value, previousLang, lang);
+      });
+      rows.forEach((row) => {
+        row.processingTime.input.value = localizeInput(row.processingTime.input.value, previousLang, lang);
+        row.machines.input.value = localizeInput(row.machines.input.value, previousLang, lang);
+      });
+      fillPeriods();
+      updateCapacity();
+      updateStations();
+    });
+
+    fillPeriods();
+    updateCapacity();
+    // Default line. The names are seeded in the current language and are plain user input afterwards.
+    [['1', '2', '1'], ['2', '6', '2'], ['3', '4', '1'], ['4', '5', '2']].forEach((station) => {
+      addStation({ name: t('cap.station.default.' + station[0]), processingTime: station[1], machines: station[2] }, false);
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     8. Site UI
      ------------------------------------------------------------------------ */
 
   // Writes the current language into every element marked with data-i18n
@@ -1532,6 +2119,7 @@
   initHeroPreview();
   initOee();
   initInventory();
+  initCapacity();
   initTheme();
   initNav();
   initReveal();

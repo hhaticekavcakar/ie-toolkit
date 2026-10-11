@@ -67,6 +67,7 @@
         <a href="#convertlab">ConvertLab</a>
         <a href="#oee">OEE</a>
         <a href="#inventory" data-i18n="nav.inventory">Inventory</a>
+        <a href="#capacity" data-i18n="nav.capacity">Capacity</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
         <a class="btn btn-primary btn-small" href="#convertlab" data-i18n="nav.open">Open ConvertLab</a>
       </div>
@@ -105,7 +106,7 @@
             <a class="btn btn-secondary" href="#modules" data-i18n="hero.explore">Explore Modules</a>
           </div>
           <dl class="spec-row">
-            <div><dt data-i18n="spec.tools">Tools</dt><dd>03 <span data-i18n="spec.of">of 04</span></dd></div>
+            <div><dt data-i18n="spec.tools">Tools</dt><dd>04 <span data-i18n="spec.of">of 04</span></dd></div>
             <div><dt data-i18n="spec.categories">Categories</dt><dd>05</dd></div>
             <div><dt data-i18n="spec.units">Units</dt><dd>34</dd></div>
           </dl>
@@ -178,7 +179,7 @@
         <header class="section-head reveal">
           <p class="tech-label" data-i18n="modules.label">Sec. 01 — Tool directory</p>
           <h2 id="modules-title" data-i18n="modules.title">Modules</h2>
-          <p data-i18n="modules.intro">Three tools are available today. One more is in development on the same foundation.</p>
+          <p data-i18n="modules.intro">All four tools are available, built on the same foundation.</p>
         </header>
 
         <div class="tool-grid">
@@ -270,10 +271,10 @@
             <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
 
-          <article class="tool-card reveal">
+          <article class="tool-card tool-card-live reveal">
             <div class="tool-meta">
               <span class="tech-label"><span data-i18n="tool.word">Tool</span> 04</span>
-              <span class="status status-soon" data-i18n="status.soon">Coming Soon</span>
+              <span class="status status-live" data-i18n="status.available">Available</span>
             </div>
             <div class="tool-art">
               <svg class="ill" viewBox="0 0 240 132" aria-hidden="true" focusable="false">
@@ -296,8 +297,9 @@
                 <text class="note" x="12" y="16"><tspan data-i18n="svg.fig">FIG.</tspan> 04</text>
               </svg>
             </div>
-            <h3 data-i18n="tool4.title">Capacity Planning</h3>
-            <p data-i18n="tool4.desc">Available time against demand, bottlenecks, shifts and resources.</p>
+            <h3><a class="stretched-link" href="#capacity" data-i18n="tool4.title">Capacity Planning</a></h3>
+            <p data-i18n="tool4.desc">Utilization, efficiency and bottleneck analysis for a serial production line.</p>
+            <span class="text-link" aria-hidden="true"><span data-i18n="tool.open">Open tool</span> →</span>
           </article>
         </div>
       </div>
@@ -686,11 +688,157 @@
       </div>
     </section>
 
-    <!-- Pricing (demonstration only) -->
-    <section class="section section-tint" id="pricing" aria-labelledby="pricing-title">
+    <!-- Capacity Planning & Bottleneck Analysis -->
+    <section class="section section-tint" id="capacity" aria-labelledby="capacity-title">
       <div class="container">
         <header class="section-head reveal">
-          <p class="tech-label" data-i18n="pricing.label">Sec. 05 — Plans</p>
+          <p class="tech-label" data-i18n="cap.label">Sec. 05 — Tool 04</p>
+          <h2 id="capacity-title" data-i18n="tool4.title">Capacity Planning</h2>
+          <p data-i18n="cap.intro">Measure how much of your capacity is used, and find the station that limits a serial production line.</p>
+        </header>
+
+        <div class="calc reveal">
+          <form class="calc-inputs" id="cap-form" novalidate aria-label="Capacity planning inputs" data-i18n-attr="aria-label:cap.inputs">
+            <fieldset class="field-group">
+              <legend class="tech-label" data-i18n="cap.group.capacity">Capacity</legend>
+
+              <div class="field">
+                <label class="field-label" for="cap-period" data-i18n="cap.period">Reporting period</label>
+                <div class="field-box">
+                  <select class="field-select" id="cap-period" aria-describedby="cap-period-hint"></select>
+                </div>
+                <p class="field-hint" id="cap-period-hint" data-i18n="cap.period.hint">All three figures must cover the same period.</p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="cap-design" data-i18n="cap.design">Design capacity</label>
+                <div class="field-box">
+                  <input class="field-value" id="cap-design" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1200" aria-describedby="cap-design-error" aria-invalid="false">
+                  <span class="unit-tag" data-cap-period-unit>units/shift</span>
+                </div>
+                <p class="field-error" id="cap-design-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="cap-effective" data-i18n="cap.effective">Effective capacity</label>
+                <div class="field-box">
+                  <input class="field-value" id="cap-effective" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="1000" aria-describedby="cap-effective-error" aria-invalid="false">
+                  <span class="unit-tag" data-cap-period-unit>units/shift</span>
+                </div>
+                <p class="field-error" id="cap-effective-error"></p>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="cap-actual" data-i18n="cap.actual">Actual output</label>
+                <div class="field-box">
+                  <input class="field-value" id="cap-actual" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="850" aria-describedby="cap-actual-error" aria-invalid="false">
+                  <span class="unit-tag" data-cap-period-unit>units/shift</span>
+                </div>
+                <p class="field-error" id="cap-actual-error"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="field-group">
+              <legend class="tech-label" data-i18n="cap.group.stations">Stations</legend>
+              <ol class="station-list" id="cap-stations"></ol>
+              <div class="station-actions">
+                <button class="btn btn-secondary btn-small" id="cap-add" type="button" data-i18n="cap.station.add">Add station</button>
+                <p class="field-hint" id="cap-limit"></p>
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="calc-results" aria-live="polite">
+            <p class="calc-status" id="cap-capacity-status" data-i18n="cap.invalid.capacity" hidden>Correct the highlighted capacity inputs to see utilization and efficiency.</p>
+
+            <div class="metric-grid metric-grid-2">
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="cap.util.title">Utilization</h3>
+                </div>
+                <p class="metric-value" id="cap-util-value">—</p>
+                <div class="meter" id="cap-util-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+                <p class="metric-detail" id="cap-util-detail"></p>
+              </article>
+
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="cap.eff.title">Efficiency</h3>
+                </div>
+                <p class="metric-value" id="cap-eff-value">—</p>
+                <div class="meter" id="cap-eff-bar" aria-hidden="true"><span class="meter-fill"></span></div>
+                <p class="metric-detail" id="cap-eff-detail"></p>
+              </article>
+            </div>
+
+            <p class="calc-warning" id="cap-warning-effective" data-i18n="cap.warning.effective" hidden>Actual output is above effective capacity, so efficiency exceeds 100%. The effective capacity or the output figure may be inconsistent; check that both cover the same period. The value is shown as calculated, not capped.</p>
+            <p class="calc-warning" id="cap-warning-design" data-i18n="cap.warning.design" hidden>Actual output is above design capacity, so utilization exceeds 100%. Design capacity is the maximum possible output, so the inputs are inconsistent. The value is shown as calculated, not capped.</p>
+
+            <div>
+              <p class="tech-label" data-i18n="cap.summary">Capacity summary</p>
+              <dl class="calc-facts">
+                <div><dt data-i18n="cap.design">Design capacity</dt><dd><span id="cap-sum-design">—</span> <span data-cap-period-unit>units/shift</span></dd></div>
+                <div><dt data-i18n="cap.effective">Effective capacity</dt><dd><span id="cap-sum-effective">—</span> <span data-cap-period-unit>units/shift</span></dd></div>
+                <div><dt data-i18n="cap.actual">Actual output</dt><dd><span id="cap-sum-actual">—</span> <span data-cap-period-unit>units/shift</span></dd></div>
+                <div><dt data-i18n="cap.fact.unused">Unused design capacity</dt><dd><span id="cap-sum-unused">—</span> <span data-cap-period-unit>units/shift</span></dd></div>
+                <div><dt data-i18n="cap.fact.allowance">Planned allowance (design − effective)</dt><dd><span id="cap-sum-allowance">—</span> <span data-cap-period-unit>units/shift</span></dd></div>
+              </dl>
+            </div>
+
+            <p class="calc-status" id="cap-stations-status" data-i18n="cap.invalid.stations" hidden>Correct the highlighted station inputs to see the bottleneck analysis.</p>
+
+            <div class="metric-grid metric-grid-2">
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="cap.bottleneck.title">Bottleneck station</h3>
+                  <span class="status status-live" id="cap-tied-tag" data-i18n="cap.bottleneck.tied" hidden>Tied</span>
+                </div>
+                <p class="metric-value metric-value-text" id="cap-bottleneck-value">—</p>
+                <p class="metric-detail" id="cap-bottleneck-detail"></p>
+              </article>
+
+              <article class="metric">
+                <div class="metric-head">
+                  <h3 data-i18n="cap.throughput.title">Maximum theoretical line throughput</h3>
+                </div>
+                <p class="metric-value"><span id="cap-throughput-value">—</span> <span class="metric-unit" data-i18n="cap.unit.perHour">units/h</span></p>
+                <p class="metric-detail" id="cap-throughput-detail"></p>
+              </article>
+            </div>
+
+            <div>
+              <p class="tech-label" id="cap-bars-label" data-i18n="cap.bars">Station capacity comparison</p>
+              <ul class="bar-list" id="cap-bars" aria-labelledby="cap-bars-label"></ul>
+            </div>
+
+            <div>
+              <p class="tech-label" data-i18n="cap.insights">Insights</p>
+              <ul class="calc-list" id="cap-insights"></ul>
+            </div>
+
+            <section class="calc-notes" aria-label="Model assumptions" data-i18n-attr="aria-label:cap.notes">
+              <p class="tech-label" data-i18n="cap.assumptions">Assumptions</p>
+              <p class="calc-notes-text" data-i18n="cap.model">This is a simplified theoretical model. Real lines lose capacity to stoppages, changeovers and variation, so actual throughput will be lower.</p>
+              <ul class="calc-list">
+                <li data-i18n="cap.assume.1">One product type.</li>
+                <li data-i18n="cap.assume.2">Serial production line: every unit passes through every station in order.</li>
+                <li data-i18n="cap.assume.3">Identical parallel machines within each station.</li>
+                <li data-i18n="cap.assume.4">No breakdowns or setup losses.</li>
+                <li data-i18n="cap.assume.5">No material shortages.</li>
+                <li data-i18n="cap.assume.6">No rework loops.</li>
+                <li data-i18n="cap.assume.7">All stations operate for the same period.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing (demonstration only) -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="tech-label" data-i18n="pricing.label">Sec. 06 — Plans</p>
           <h2 id="pricing-title" data-i18n="pricing.title">Pricing</h2>
           <p class="demo-note"><strong data-i18n="pricing.demoStrong">Demonstration only.</strong> <span data-i18n="pricing.demoText">These plans are examples. No payments or subscriptions are available.</span></p>
         </header>
@@ -740,6 +888,7 @@
         <a href="#convertlab">ConvertLab</a>
         <a href="#oee">OEE</a>
         <a href="#inventory" data-i18n="nav.inventory">Inventory</a>
+        <a href="#capacity" data-i18n="nav.capacity">Capacity</a>
         <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
       </nav>
       <p class="footer-note">&copy; <span id="footer-year">2026</span> <span data-i18n="footer.note">IE Toolkit. Built for industrial engineers.</span></p>
