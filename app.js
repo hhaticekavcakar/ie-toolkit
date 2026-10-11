@@ -2,8 +2,8 @@
    IE Toolkit — app.js
    1. Conversion data      (edit here to add units or categories)
    2. Pure functions       (convert, parseInput, formatNumber, evaluate)
-   3. ConvertLab UI
-   4. Site UI              (mobile nav, scroll reveal, footer year)
+   3. ConvertLab UI        (full converter + hero preview)
+   4. Site UI             (mobile nav, scroll reveal, footer year)
    ========================================================================== */
 (function () {
   'use strict';
@@ -296,6 +296,38 @@
     selectCategory(activeCategory);
   }
 
+  // Compact km → mi read-out in the hero. Runs on the same evaluate() pipeline
+  // as ConvertLab, so no conversion factor is repeated here.
+  function initHeroPreview() {
+    const input = document.getElementById('hp-value');
+    if (!input) return;
+
+    const resultOutput = document.getElementById('hp-result');
+    const lineEl = document.getElementById('hp-line');
+    const length = getCategory('length');
+    const from = getUnit(length, 'km');
+    const to = getUnit(length, 'mi');
+
+    function update() {
+      const outcome = evaluate(length.id, input.value, from.id, to.id);
+      const isOk = outcome.status === 'ok';
+      const isError = outcome.status === 'error';
+
+      input.setAttribute('aria-invalid', String(isError));
+      resultOutput.textContent = isOk ? formatNumber(outcome.value) : EMPTY_RESULT;
+      lineEl.classList.toggle('is-error', isError);
+      if (isOk) {
+        lineEl.textContent =
+          formatNumber(outcome.input) + ' ' + from.symbol + ' = ' + formatNumber(outcome.value) + ' ' + to.symbol;
+      } else {
+        lineEl.textContent = isError ? outcome.message : 'Enter a length in kilometers';
+      }
+    }
+
+    input.addEventListener('input', update);
+    update();
+  }
+
   /* ------------------------------------------------------------------------
      4. Site UI
      ------------------------------------------------------------------------ */
@@ -344,6 +376,7 @@
   // Reveal styles only apply once JS is running, so content is never hidden without it.
   document.documentElement.classList.add('js');
   initConvertLab();
+  initHeroPreview();
   initNav();
   initReveal();
   initFooterYear();
